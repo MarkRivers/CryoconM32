@@ -1,0 +1,90 @@
+#!$(INSTALL)/bin/$(ARCH)/example
+
+########################################
+# set backspace key to delete in WindShell
+$(VXWORKS_ONLY)tyBackspaceSet (0x7f)
+
+# set Network Time Protocol server details
+$(VXWORKS_ONLY)putenv("EPICS_TS_MIN_WEST=0")
+#####$(VXWORKS_ONLY)putenv("EPICS_TS_NTP_INET=172.23.194.5")
+$(VXWORKS_ONLY)putenv("EPICS_TS_NTP_INET=172.23.240.2")
+
+# mount NFS for name server and bumpless reboot
+# user name jhr, group dcs
+nfsAuthUnixSet("serv5", 810, 500, 0, 0)
+hostAdd "serv5", "172.23.240.5"
+
+########################################
+## You may have to change example to something else
+## everywhere it appears in this file
+
+$(VXWORKS_ONLY)putenv("EPICS_CA_SERVER_PORT=6064")
+$(VXWORKS_ONLY)putenv("EPICS_CA_REPEATER_PORT=6065")
+
+# IP site enumerations
+$(VXWORKS_ONLY)A = 0
+$(VXWORKS_ONLY)B = 1
+$(VXWORKS_ONLY)C = 2
+$(VXWORKS_ONLY)D = 3
+
+cd "$(INSTALL)"
+
+# Load binaries on architectures that need to do so.
+# VXWORKS_ONLY, LINUX_ONLY and RTEMS_ONLY are macros that resolve
+# to a comment symbol on architectures that are not the current
+# build architecture, so they can be used liberally to do architecture
+# specific things. Alternatively, you can include an architecture
+# specific file.
+$(VXWORKS_ONLY)ld < bin/$(ARCH)/example.munch
+
+## Register all support components
+dbLoadDatabase("dbd/example.dbd")
+example_registerRecordDeviceDriver(pdbbase)
+
+#--------------Configure the IP Carrier Cards--------------
+###########################################################
+# Hytec 8002 Carrier in VME Slot 6
+# Params are : cardnum, interruptlevel, vectornum
+$(VXWORKS_ONLY)ARGS = malloc(20)
+$(VXWORKS_ONLY)IVEC = newInterruptVector()
+$(VXWORKS_ONLY)sprintf (ARGS, "%d %d %d", 6, 2, IVEC)
+$(VXWORKS_ONLY)IPAC6 = ipacAddHy8002(ARGS)
+
+#----------------Configure IP Modules----------------------
+# Hytec 8515 IPOctal serial module in slot A on the IP carrier card.
+#
+# Configure module on carrier 6, slot 0
+# Params are : cardnum, vmeslotnum, ipslotnum, vectornum,
+#              intdelay (-ve => FIFO interrupt), halfduplexmode, delay845
+#
+$(VXWORKS_ONLY)IVEC = newInterruptVector()
+#$(VXWORKS_ONLY)MOD60 = Hy8515Configure (60, IPAC6, A, IVEC, -32, 0, 0)
+$(VXWORKS_ONLY)MOD60 = Hy8515Configure (60, IPAC6, A, IVEC, 625, 0, 0)
+
+# Create devices
+# Params are : name, card number, port number, read buffer size
+#              write buffer size
+#
+# TS-ID-TMON-01 Cryocon M14 Temperature Monitor
+$(VXWORKS_ONLY)PORT600 = tyHYOctalDevCreate ("/ty/60/0", MOD60, 0, 2500, 250)
+
+# Configure serial ports
+# Params are : Port, Baud rate, Parity 'O'=odd, 'E'=even, 'N'=none,
+#              Number of stop bits. 1 or 2, Number of data bits. 5,6,7 or 8
+#              Flow control. 'R'=receive only, 'T'=transmit only, 'H'=both,
+#                            'N'=none, 'S'=software
+$(VXWORKS_ONLY)tyHYOctalConfig (PORT600, 9600, 'N', 1, 8, 'N')
+
+# Set up asyn ports
+# Params are : portName, ttyName, priority, noAutoConnect, noProcessEos
+$(VXWORKS_ONLY)drvAsynSerialPortConfigure("ty_60_0", "/ty/60/0", 0, 0, 0)
+
+STREAM_PROTOCOL_DIR = "$(CRYOCONM14)/data"
+
+## Load record instances
+dbLoadRecords("db/example.db")
+
+iocInit()
+
+## Start any sequence programs
+#seq sncExample,"user=xxx"

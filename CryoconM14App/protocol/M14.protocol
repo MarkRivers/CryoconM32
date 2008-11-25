@@ -1,0 +1,37 @@
+# Stream Device protocol file for the Cryocon M14 Temperature Monitor
+# This monitor has for sensor channels. The protocol format follows the standard
+# SCPI based on IEEE 488.2
+# It is a purely command-response mechanism, with no more than one parameter
+# passed at a time. More complex data can be retrieved such as calibration
+# curves but the ccutility from Cryocon or the web interface can be used for
+# these and once setup should rarely need modifying.
+# This limited protocol file only deals with retrieving the temperatures and
+# some other basic status information.
+
+Terminator = "\r\n";
+readtimeout = 500;
+PollPeriod = 500;
+ExtraInput = Ignore; #Raw and Temp can have extra spaces after number
+
+# For the sensor reading the fields substituted in from the records will be
+# A,B,C or D.
+
+# Raw sensor reading. Usually in Ohms but depends on sensor type.
+sensorraw { out "INP \$1:SENPR?"; in "%f"; }
+
+# Converted temperature.
+temp { out "INP \$1:TEMP?"; in "%f"; }
+
+# System information
+# Date (Using \" did not work)
+setdate { out 'SYS:DATE "%s"'; }
+date { out "SYS:DATE?"; in "%10c"; }
+# Time (Using \" did not work)
+settime { out 'SYS:TIME "%s"'; }
+time { out "SYS:TIME?"; in "%8c"; }
+# IP Address
+ipaddress { out "NETW:IPAD?"; in "%15c"; }
+# MAC Address
+macaddress { out "NETW:MAC?"; in "%18c"; }
+# Reseed the Averaging Filter
+reseed { out "SYS:RES"; }

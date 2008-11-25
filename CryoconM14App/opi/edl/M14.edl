@@ -1,0 +1,624 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 974
+y 255
+w 313
+h 426
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Cryocon M14"
+showGrid
+snapToGrid
+gridSize 8
+endScreenProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 0
+w 312
+h 32
+font "arial-medium-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 61
+value {
+  "$(tmon) TEMP. MONITOR"
+}
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 192
+y 40
+w 112
+h 24
+controlPv "$(tmon):DATE"
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "center"
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 192
+y 104
+w 112
+h 24
+controlPv "$(tmon):TIME"
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "center"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 8
+y 264
+w 80
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Sensor A"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 96
+y 232
+w 96
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Raw Input"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 200
+y 232
+w 104
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Temperature"
+}
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 96
+y 264
+w 112
+h 24
+controlPv "$(tmon):A:RAW"
+precision 6
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "right"
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 96
+y 296
+w 112
+h 24
+controlPv "$(tmon):B:RAW"
+precision 6
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "right"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 8
+y 296
+w 80
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Sensor B"
+}
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 96
+y 328
+w 112
+h 24
+controlPv "$(tmon):C:RAW"
+precision 3
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "right"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 8
+y 328
+w 80
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Sensor C"
+}
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 96
+y 360
+w 112
+h 24
+controlPv "$(tmon):D:RAW"
+precision 3
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "right"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 8
+y 360
+w 80
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Sensor D"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 392
+w 56
+h 24
+fgColor index 46
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+label "EXIT"
+font "arial-medium-r-16.0"
+3d
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 216
+y 264
+w 88
+h 24
+controlPv "$(device):$(record1)"
+font "arial-bold-r-16.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 216
+y 296
+w 88
+h 24
+controlPv "$(device):$(record2)"
+font "arial-bold-r-16.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 216
+y 328
+w 88
+h 24
+controlPv "$(device):$(record3)"
+font "arial-bold-r-16.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 216
+y 360
+w 88
+h 24
+controlPv "$(device):$(record4)"
+font "arial-bold-r-16.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 160
+y 200
+w 144
+h 24
+controlPv "$(tmon):MAC"
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-14.0"
+fontAlign "center"
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 160
+y 168
+w 144
+h 24
+controlPv "$(tmon):IPAD"
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-16.0"
+fontAlign "center"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 40
+w 176
+h 24
+fgColor index 25
+onColor index 3
+offColor index 3
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tmon):DATE.PROC"
+pressValue "1"
+onLabel "processing..."
+offLabel "Get System Date"
+3d
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 104
+w 176
+h 24
+fgColor index 25
+onColor index 3
+offColor index 3
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tmon):TIME.PROC"
+pressValue "1"
+onLabel "processing..."
+offLabel "Get System Time"
+3d
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 168
+w 144
+h 24
+fgColor index 25
+onColor index 3
+offColor index 3
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tmon):IPAD.PROC"
+pressValue "1"
+onLabel "processing..."
+offLabel "Get IP Address"
+3d
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 200
+w 144
+h 24
+fgColor index 25
+onColor index 3
+offColor index 3
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tmon):MAC.PROC"
+pressValue "1"
+onLabel "processing..."
+offLabel "Get MAC Address"
+3d
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 192
+y 64
+w 112
+h 40
+controlPv "$(tmon):SET:DATE"
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 8
+y 72
+w 184
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Set Date (mm/dd/yyyy)"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 8
+y 136
+w 184
+h 24
+font "arial-bold-r-16.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Set Time (hh:mm:ss)"
+}
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 192
+y 128
+w 112
+h 40
+controlPv "$(tmon):SET:TIME"
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 232
+w 80
+h 24
+fgColor index 25
+onColor index 3
+offColor index 3
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tmon):RESEED.PROC"
+pressValue "1"
+onLabel "proc..."
+offLabel "Reseed"
+3d
+font "arial-medium-r-16.0"
+endObjectProperties
+
