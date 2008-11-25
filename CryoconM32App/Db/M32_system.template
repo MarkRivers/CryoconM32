@@ -8,49 +8,49 @@
 record(stringin, "$(tmon):DATE") {
   field(DESC, "System Date")
   field(DTYP, "stream")
-  field(INP, "@M14.protocol date $(port)")
+  field(INP, "@M32.protocol date $(port)")
   field(PINI, "YES")
 }
 
 record(stringout, "$(tmon):SET:DATE") {
   field(DESC, "Set System Date")
   field(DTYP, "stream")
-  field(OUT, "@M14.protocol setdate $(port)")
+  field(OUT, "@M32.protocol setdate $(port)")
   field(FLNK, "$(tmon):DATE")
 }
 
 record(stringin, "$(tmon):TIME") {
   field(DESC, "System Time")
   field(DTYP, "stream")
-  field(INP, "@M14.protocol time $(port)")
+  field(INP, "@M32.protocol time $(port)")
   field(PINI, "YES")
 }
 
 record(stringout, "$(tmon):SET:TIME") {
   field(DESC, "Set System Time")
   field(DTYP, "stream")
-  field(OUT, "@M14.protocol settime $(port)")
+  field(OUT, "@M32.protocol settime $(port)")
   field(FLNK, "$(tmon):TIME")
 }
 
 record(stringin, "$(tmon):IPAD") {
   field(DESC, "IP Address")
   field(DTYP, "stream")
-  field(INP, "@M14.protocol ipaddress $(port)")
+  field(INP, "@M32.protocol ipaddress $(port)")
   field(PINI, "YES")
 }
 
 record(stringin, "$(tmon):MAC") {
   field(DESC, "MAC Address")
   field(DTYP, "stream")
-  field(INP, "@M14.protocol macaddress $(port)")
+  field(INP, "@M32.protocol macaddress $(port)")
   field(PINI, "YES")
 }
 
 record(stringout, "$(tmon):RESEED") {
   field(DESC, "Reseed Ave Filter")
   field(DTYP, "stream")
-  field(OUT, "@M14.protocol reseed $(port)")
+  field(OUT, "@M32.protocol reseed $(port)")
 }
 
 #! Further lines contain data used by VisualDCT

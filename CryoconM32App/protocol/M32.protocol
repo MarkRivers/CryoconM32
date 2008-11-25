@@ -1,6 +1,8 @@
-# Stream Device protocol file for the Cryocon M14 Temperature Monitor
-# This monitor has for sensor channels. The protocol format follows the standard
+# Stream Device protocol file for the Cryocon M32 Temperature Monitor
+# This temperature controller has 2 sensor channels. The protocol format follows the standard
 # SCPI based on IEEE 488.2
+#
+# This comment from CryoconM14 module on which this is based.
 # It is a purely command-response mechanism, with no more than one parameter
 # passed at a time. More complex data can be retrieved such as calibration
 # curves but the ccutility from Cryocon or the web interface can be used for

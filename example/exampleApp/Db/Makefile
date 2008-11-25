@@ -13,8 +13,8 @@ include $(TOP)/configure/CONFIG
 #
 DB += example.db
 
-USES_TEMPLATE += $(CRYOCONM14)/db/M32_system.template
-USES_TEMPLATE += $(CRYOCONM14)/db/M32_sensor.template
+USES_TEMPLATE += $(CRYOCONM32)/db/M32_system.template
+USES_TEMPLATE += $(CRYOCONM32)/db/M32_sensor.template
 
 include $(TOP)/configure/RULES
 #----------------------------------------

@@ -8,7 +8,7 @@
 record(ai, "$(tmon):$(sensor):RAW") {
   field(DESC, "Raw Sensor Reading")
   field(DTYP, "stream")
-  field(INP, "@M14.protocol sensorraw($(sensor)) $(port)")
+  field(INP, "@M32.protocol sensorraw($(sensor)) $(port)")
 #  field(EGU, "Ohms")
   field(SCAN, "$(scan) second")
   field(PINI, "YES")
@@ -19,7 +19,7 @@ record(ai, "$(tmon):$(sensor):RAW") {
 record(ai, "$(device):$(record)") {
   field(DESC, "Sensor Temperature")
   field(DTYP, "stream")
-  field(INP, "@M14.protocol temp($(sensor)) $(port)")
+  field(INP, "@M32.protocol temp($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "$(scan) second")
   field(PINI, "YES")
