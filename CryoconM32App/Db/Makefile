@@ -11,8 +11,8 @@ include $(TOP)/configure/CONFIG
 # In a Diamond Support Module, install
 # templates like this
 #
-DB += M14_system.template
-DB += M14_sensor.template
+DB += M32_system.template
+DB += M32_sensor.template
 
 include $(TOP)/configure/RULES
 #----------------------------------------
