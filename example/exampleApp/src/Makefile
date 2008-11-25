@@ -21,7 +21,7 @@ example_DBD += Hy8515.dbd
 example_DBD += asyn.dbd
 example_DBD += drvAsynSerialPort.dbd
 example_DBD += stream.dbd
-example_DBD += CryoconM14.dbd
+example_DBD += CryoconM32.dbd
 
 # example_registerRecordDeviceDriver.cpp will be created
 # example.dbd
@@ -45,7 +45,7 @@ example_LIBS += drvHy8515
 example_LIBS += asyn
 example_LIBS += stream
 example_LIBS += pcre
-example_LIBS += CryoconM14
+example_LIBS += CryoconM32
 
 # We need to link this IOC Application against the EPICS Base libraries
 example_LIBS += $(EPICS_BASE_IOC_LIBS)

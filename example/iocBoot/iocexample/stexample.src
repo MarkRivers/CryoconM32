@@ -65,7 +65,7 @@ $(VXWORKS_ONLY)MOD60 = Hy8515Configure (60, IPAC6, A, IVEC, 625, 0, 0)
 # Params are : name, card number, port number, read buffer size
 #              write buffer size
 #
-# TS-ID-TMON-01 Cryocon M14 Temperature Monitor
+# TS-ID-TCTRL-01 Cryocon M32 Temperature Controller
 $(VXWORKS_ONLY)PORT600 = tyHYOctalDevCreate ("/ty/60/0", MOD60, 0, 2500, 250)
 
 # Configure serial ports
@@ -79,7 +79,7 @@ $(VXWORKS_ONLY)tyHYOctalConfig (PORT600, 9600, 'N', 1, 8, 'N')
 # Params are : portName, ttyName, priority, noAutoConnect, noProcessEos
 $(VXWORKS_ONLY)drvAsynSerialPortConfigure("ty_60_0", "/ty/60/0", 0, 0, 0)
 
-STREAM_PROTOCOL_DIR = "$(CRYOCONM14)/data"
+STREAM_PROTOCOL_DIR = "$(CRYOCONM32)/data"
 
 ## Load record instances
 dbLoadRecords("db/example.db")
