@@ -10,7 +10,9 @@
 # This limited protocol file only deals with retrieving the temperatures and
 # some other basic status information.
 
-Terminator = "\r\n";
+# The terminator is stated in the M32 manual as Ox0a or \n a.k.a line feed.
+# NOTE: This is DIFFERENT to the M14 protocol, which uses "\r\n" as its terminator.
+Terminator = "\n";
 readtimeout = 500;
 PollPeriod = 500;
 ExtraInput = Ignore; #Raw and Temp can have extra spaces after number
