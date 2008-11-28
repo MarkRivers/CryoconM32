@@ -27,15 +27,27 @@ sensorraw { out "INP \$1:SENPR?"; in "%f"; }
 temp { out "INP \$1:TEMP?"; in "%f"; }
 
 # System information
+
 # Date (Using \" did not work)
 setdate { out 'SYS:DATE "%s"'; }
 date { out "SYS:DATE?"; in "%10c"; }
+
 # Time (Using \" did not work)
 settime { out 'SYS:TIME "%s"'; }
 time { out "SYS:TIME?"; in "%8c"; }
+
 # IP Address
 ipaddress { out "NETW:IPAD?"; in "%15c"; }
+
 # MAC Address
 macaddress { out "NETW:MAC?"; in "%18c"; }
+
 # Reseed the Averaging Filter
 reseed { out "SYS:RES"; }
+
+# Get the firmware revision level.
+getFirmwareRev { out "SYSTEM:FWREV?" ; in "%s" ; }
+
+# Get the hardware revision level.
+getHardwareRev { out "SYSTEM:HWREV?" ; in "%s" ; }
+
