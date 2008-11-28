@@ -53,8 +53,22 @@ record(stringout, "$(tmon):RESEED") {
   field(OUT, "@M32.protocol reseed $(port)")
 }
 
+record(stringin, "$(tmon):FWREV") {
+  field(DESC, "Firmware Revision Level")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getFirmwareRev $(port)")
+  field(PINI, "YES")
+}
+
+record(stringin, "$(tmon):HWREV") {
+  field(DESC, "Hardware Revision Level")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getHardwareRev $(port)")
+  field(PINI, "YES")
+}
+
 #! Further lines contain data used by VisualDCT
-#! View(0,0,1.0)
+#! View(0,200,1.0)
 #! Record("$(tmon):DATE",300,8,0,0,"$(tmon):DATE")
 #! Record("$(tmon):SET:DATE",40,8,0,0,"$(tmon):SET:DATE")
 #! Field("$(tmon):SET:DATE.FLNK",16777215,1,"$(tmon):SET:DATE.FLNK")
@@ -66,3 +80,5 @@ record(stringout, "$(tmon):RESEED") {
 #! Record("$(tmon):IPAD",40,288,0,0,"$(tmon):IPAD")
 #! Record("$(tmon):MAC",300,288,0,0,"$(tmon):MAC")
 #! Record("$(tmon):RESEED",40,422,0,1,"$(tmon):RESEED")
+#! Record("$(tmon):FWREV",300,428,0,1,"$(tmon):FWREV")
+#! Record("$(tmon):HWREV",300,588,0,1,"$(tmon):HWREV")
