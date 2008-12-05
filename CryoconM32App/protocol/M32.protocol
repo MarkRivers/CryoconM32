@@ -9,7 +9,11 @@
 # these and once setup should rarely need modifying.
 # This limited protocol file only deals with retrieving the temperatures and
 # some other basic status information.
-
+#
+# NOTE: Some commands have abbreviations. Since these abbreviations are 
+# different for M14 and M32 models, it seems less confusing not to use them
+# and stick to the full command.
+#
 # The terminator is stated in the M32 manual as Ox0a or \n a.k.a line feed.
 # NOTE: This is DIFFERENT to the M14 protocol, which uses "\r\n" as its terminator.
 Terminator = "\n";
@@ -17,37 +21,103 @@ readtimeout = 500;
 PollPeriod = 500;
 ExtraInput = Ignore; #Raw and Temp can have extra spaces after number
 
-# For the sensor reading the fields substituted in from the records will be
-# A,B,C or D.
+# COMMANDS FOR THE SENSOR TEMPLATE: temperature readings and stats.
+# The M32 unit has 2 input temperature sensor channels.
 
 # Raw sensor reading. Usually in Ohms but depends on sensor type.
-sensorraw { out "INP \$1:SENPR?"; in "%f"; }
+getSensorraw { out "INP \$1:SENPR?"; in "%f"; }
 
 # Converted temperature.
-temp { out "INP \$1:TEMP?"; in "%f"; }
+getTemp { out "INP \$1:TEMP?"; in "%f"; }
 
-# System information
+# Get the units.
+getTempUnits { out "INPUT \$1:UNITS?"; in "%s"; }
 
-# Date (Using \" did not work)
-setdate { out 'SYS:DATE "%s"'; }
-date { out "SYS:DATE?"; in "%10c"; }
+# Get the statistical minimum.
+getTempMin { out "INPUT \$1:MINIMUM?"; in "%f"; }
 
-# Time (Using \" did not work)
-settime { out 'SYS:TIME "%s"'; }
-time { out "SYS:TIME?"; in "%8c"; }
+# Get the statistical maximum temperature.
+getTempMax { out "INPUT \$1:MAXIMUM?"; in "%f"; }
 
-# IP Address
-ipaddress { out "NETW:IPAD?"; in "%15c"; }
+# Get the statistical variance in the temperature.
+getTempVariance { out "INPUT \$1:VARIANCE?"; in "%f"; }
 
-# MAC Address
-macaddress { out "NETW:MAC?"; in "%18c"; }
+# Get the temperature slope.
+getTempSlope { out "INPUT \$1:SLOPE?"; in "%f"; }
+
+# Get the temperature offset for the best fit for a straight line.
+getTempOffset { out "INPUT \$1:OFFSET?"; in "%f"; }
+
+# COMMANDS FOR THE CONTROLLER TEMPLATE: setting and querying control loops.
+# Note that which sensor is input to which control loop is configurable
+# in the unit.
+# The M32 unit has 2 control loops.
+getSetpointT { out "LOOP \$1:SETPT?" ; in "%f"; }
+
+setSetpointT { out "LOOP \$1:SETPT %f" ; }
+
+# Loop type: mode loop is operating in.
+getLoopType { out "LOOP \$1:TYPE?" ; in "%s" ; } 
+
+# Loop source: which input channel is used to control the loop.
+getLoopSource { out "LOOP \$1:SOURCE?" ; in "%s" ; }
+
+# Loop ramp: Is there a temperature ramp in progress.
+getLoopRamp { out "LOOP \$1:RAMP?" ; in "%s" ; }
+
+# Loop ramp rate: ramp rate used when performing a ramp.
+getLoopRampRate { out "LOOP \$1:RATE?" ; in "%f" ; } 
+setLoopRampRate { out "LOOP \$1:RATE %f" ; }
+
+# Parameters for the PID loop.
+getLoopPGain { out "LOOP \$1:PGAIN?" ; in "%f" ; }
+getLoopIGain { out "LOOP \$1:IGAIN?" ; in "%f" ; }
+getLoopDGain { out "LOOP \$1:DGAIN?" ; in "%f" ; }
+
+setLoopPGain { out "LOOP \$1:PGAIN %f" ; }
+setLoopIGain { out "LOOP \$1:IGAIN %f" ; }
+setLoopDGain { out "LOOP \$1:DGAIN %f" ; }
+
+#getHeaterCur {}
+
+# COMMANDS FOR THE SYSTEM TEMPLATE: System information
 
 # Reseed the Averaging Filter
-reseed { out "SYS:RES"; }
+reseed { out "SYSTEM:RESEED" ; }
 
 # Get the firmware revision level.
 getFirmwareRev { out "SYSTEM:FWREV?" ; in "%s" ; }
 
 # Get the hardware revision level.
 getHardwareRev { out "SYSTEM:HWREV?" ; in "%s" ; }
+
+# Get full model information
+getModel { out "*IDN?" ; in "%s" ; }
+
+# Get the instrument name.
+getControllerName { out "SYSTEM:NAME?" ; in "%s" ; }
+
+# Get the ambient temperature inside the instrument.
+getAmbientT { out "SYSTEM:AMBIENT?" ; in "%s" ; }
+
+# Get the heater sink temperature.
+getSinkT { out "SYSTEM:HTRST?" ; in "\r%fC" ; }
+
+# The time over which statistics have been collected.
+getStatsTime { out "STATS:TIME?" ; in "%f"; }
+
+# Reset
+resetStats { out "STATS:RESET" ; }
+
+# Display Filter Time Constant.
+getFilterTC { out "SYSTEM:DISTC" ; in "%f" ; }
+
+# Display resolution: FULL, 1, 2 or 3
+getDisplayRes {out "SYSTEM:DRES" ; in "%s" ; }
+
+# Whether system will power up in control mode.
+getPUControl {out "SYSTEM:PUCONTROL" ; in "%s" ; }
+
+
+
 

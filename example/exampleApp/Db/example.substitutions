@@ -1,14 +1,19 @@
 file M32_system.template
 {
-pattern { tmon,            port}
-        { "TS-ID-TMON-01", "ty_60_0" }
+pattern { tctrlr, port, egu }
+        { "TS-EA-TCTRL-01", "ty_60_0", "K" }
 }
 
 file M32_sensor.template
 {
-pattern { tmon,            device, record, port, sensor, scan, adel, egu, lolo, low, high, hihi}
-        { "TS-ID-TMON-01", "TS-ID-TMON-01", "T1", "ty_60_0", "A", 5, 0.02, "K", 0,  4,  8, 1000 }
-        { "TS-ID-TMON-01", "TS-ID-TMON-01", "T2", "ty_60_0", "B", 5, 0.02, "K" ,0, 10, 50, 1000 }
-        { "TS-ID-TMON-01", "TS-ID-TMON-01", "T3", "ty_60_0", "C", 5, 0.02, "K", 0,  4,  8, 1000 }
-        { "TS-ID-TMON-01", "TS-ID-TMON-01", "T4", "ty_60_0", "D", 5, 0.02, "K", 0, 10, 50, 1000 }
+pattern { tctrlr,            device, record, port, sensor, scan, adel, egu, lolo, low, high, hihi}
+        { "TS-EA-TCTRL-01", "TS-ID-TCTRL-01", "T1", "ty_60_0", "A", 5, 0.02, "K", 0,  4,  8, 1000 }
+        { "TS-EA-TCTRL-01", "TS-ID-TCTRL-01", "T2", "ty_60_0", "B", 5, 0.02, "K" ,0, 10, 50, 1000 }
+}
+
+file M32_control.template
+{
+pattern { tctrlr, loop, port, scan }
+	{ "TS-EA-TCTL-01", 1, "ty_60_0", 5 }
+	{ "TS-EA-TCTL-01", 2, "ty_60_0", 5 }
 }

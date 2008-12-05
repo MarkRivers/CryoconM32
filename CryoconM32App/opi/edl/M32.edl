@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 974
-y 255
-w 313
-h 426
+x 1010
+y 279
+w 642
+h 788
 font "arial-medium-r-18.0"
 ctlFont "arial-medium-r-18.0"
 btnFont "arial-medium-r-18.0"
@@ -33,53 +33,15 @@ minor 1
 release 0
 x 0
 y 0
-w 312
+w 592
 h 32
 font "arial-medium-r-16.0"
 fontAlign "center"
 fgColor index 14
 bgColor index 61
 value {
-  "$(tmon) TEMP. MONITOR"
+  "$(tctrlr) TEMPERATURE CONTROLLER"
 }
-endObjectProperties
-
-# (Textupdate)
-object TextupdateClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 192
-y 40
-w 112
-h 24
-controlPv "$(tmon):DATE"
-fgColor index 16
-fgAlarm
-bgColor index 10
-fill
-font "arial-bold-r-16.0"
-fontAlign "center"
-endObjectProperties
-
-# (Textupdate)
-object TextupdateClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 192
-y 104
-w 112
-h 24
-controlPv "$(tmon):TIME"
-fgColor index 16
-fgAlarm
-bgColor index 10
-fill
-font "arial-bold-r-16.0"
-fontAlign "center"
 endObjectProperties
 
 # (Static Text)
@@ -88,16 +50,17 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 8
-y 264
-w 80
-h 24
+x 192
+y 112
+w 96
+h 32
 font "arial-bold-r-16.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
 value {
-  "Sensor A"
+  "Sensor"
+  "Channel A"
 }
 endObjectProperties
 
@@ -107,11 +70,11 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 96
-y 232
+x 16
+y 152
 w 96
 h 24
-font "arial-bold-r-16.0"
+font "arial-bold-r-14.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
@@ -126,11 +89,11 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 200
-y 232
+x 16
+y 184
 w 104
 h 24
-font "arial-bold-r-16.0"
+font "arial-bold-r-14.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
@@ -145,17 +108,17 @@ beginObjectProperties
 major 10
 minor 0
 release 0
-x 96
-y 264
-w 112
+x 248
+y 152
+w 88
 h 24
-controlPv "$(tmon):A:RAW"
+controlPv "$(tctrlr):STS:A:RAW"
 precision 6
 fgColor index 16
 fgAlarm
 bgColor index 10
 fill
-font "arial-bold-r-16.0"
+font "arial-medium-r-14.0"
 fontAlign "right"
 endObjectProperties
 
@@ -165,17 +128,17 @@ beginObjectProperties
 major 10
 minor 0
 release 0
-x 96
-y 296
-w 112
+x 488
+y 152
+w 88
 h 24
-controlPv "$(tmon):B:RAW"
+controlPv "$(tctrlr):STS:B:RAW"
 precision 6
 fgColor index 16
 fgAlarm
 bgColor index 10
 fill
-font "arial-bold-r-16.0"
+font "arial-medium-r-14.0"
 fontAlign "right"
 endObjectProperties
 
@@ -185,94 +148,17 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 8
-y 296
-w 80
-h 24
+x 424
+y 112
+w 104
+h 32
 font "arial-bold-r-16.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
 value {
-  "Sensor B"
-}
-endObjectProperties
-
-# (Textupdate)
-object TextupdateClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 96
-y 328
-w 112
-h 24
-controlPv "$(tmon):C:RAW"
-precision 3
-fgColor index 16
-fgAlarm
-bgColor index 10
-fill
-font "arial-bold-r-16.0"
-fontAlign "right"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 8
-y 328
-w 80
-h 24
-font "arial-bold-r-16.0"
-fgColor index 14
-bgColor index 6
-useDisplayBg
-value {
-  "Sensor C"
-}
-endObjectProperties
-
-# (Textupdate)
-object TextupdateClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 96
-y 360
-w 112
-h 24
-controlPv "$(tmon):D:RAW"
-precision 3
-fgColor index 16
-fgAlarm
-bgColor index 10
-fill
-font "arial-bold-r-16.0"
-fontAlign "right"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 8
-y 360
-w 80
-h 24
-font "arial-bold-r-16.0"
-fgColor index 14
-bgColor index 6
-useDisplayBg
-value {
-  "Sensor D"
+  "Sensor "
+  "Channel B"
 }
 endObjectProperties
 
@@ -282,8 +168,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 248
-y 392
+x 512
+y 680
 w 56
 h 24
 fgColor index 46
@@ -301,12 +187,12 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 216
-y 264
+x 248
+y 184
 w 88
 h 24
-controlPv "$(device):$(record1)"
-font "arial-bold-r-16.0"
+controlPv "$(device):STS:$(record1)"
+font "arial-medium-r-14.0"
 fontAlign "right"
 fgColor index 16
 fgAlarm
@@ -326,12 +212,12 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 216
-y 296
+x 488
+y 184
 w 88
 h 24
-controlPv "$(device):$(record2)"
-font "arial-bold-r-16.0"
+controlPv "$(device):STS:$(record2)"
+font "arial-medium-r-14.0"
 fontAlign "right"
 fgColor index 16
 fgAlarm
@@ -345,268 +231,14 @@ newPos
 objType "monitors"
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 216
-y 328
-w 88
-h 24
-controlPv "$(device):$(record3)"
-font "arial-bold-r-16.0"
-fontAlign "right"
-fgColor index 16
-fgAlarm
-bgColor index 10
-limitsFromDb
-nullColor index 0
-useHexPrefix
-showUnits
-useAlarmBorder
-newPos
-objType "monitors"
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 216
-y 360
-w 88
-h 24
-controlPv "$(device):$(record4)"
-font "arial-bold-r-16.0"
-fontAlign "right"
-fgColor index 16
-fgAlarm
-bgColor index 10
-limitsFromDb
-nullColor index 0
-useHexPrefix
-showUnits
-useAlarmBorder
-newPos
-objType "monitors"
-endObjectProperties
-
-# (Textupdate)
-object TextupdateClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 160
-y 200
-w 144
-h 24
-controlPv "$(tmon):MAC"
-fgColor index 16
-fgAlarm
-bgColor index 10
-fill
-font "arial-bold-r-14.0"
-fontAlign "center"
-endObjectProperties
-
-# (Textupdate)
-object TextupdateClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 160
-y 168
-w 144
-h 24
-controlPv "$(tmon):IPAD"
-fgColor index 16
-fgAlarm
-bgColor index 10
-fill
-font "arial-bold-r-16.0"
-fontAlign "center"
-endObjectProperties
-
 # (Message Button)
 object activeMessageButtonClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 8
-y 40
-w 176
-h 24
-fgColor index 25
-onColor index 3
-offColor index 3
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(tmon):DATE.PROC"
-pressValue "1"
-onLabel "processing..."
-offLabel "Get System Date"
-3d
-font "arial-medium-r-16.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 8
-y 104
-w 176
-h 24
-fgColor index 25
-onColor index 3
-offColor index 3
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(tmon):TIME.PROC"
-pressValue "1"
-onLabel "processing..."
-offLabel "Get System Time"
-3d
-font "arial-medium-r-16.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 8
-y 168
-w 144
-h 24
-fgColor index 25
-onColor index 3
-offColor index 3
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(tmon):IPAD.PROC"
-pressValue "1"
-onLabel "processing..."
-offLabel "Get IP Address"
-3d
-font "arial-medium-r-16.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 8
-y 200
-w 144
-h 24
-fgColor index 25
-onColor index 3
-offColor index 3
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(tmon):MAC.PROC"
-pressValue "1"
-onLabel "processing..."
-offLabel "Get MAC Address"
-3d
-font "arial-medium-r-16.0"
-endObjectProperties
-
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 192
-y 64
-w 112
-h 40
-controlPv "$(tmon):SET:DATE"
-fgColor index 25
-fgAlarm
-bgColor index 3
-fill
-font "arial-medium-r-16.0"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 8
-y 72
-w 184
-h 24
-font "arial-bold-r-16.0"
-fgColor index 14
-bgColor index 3
-useDisplayBg
-value {
-  "Set Date (mm/dd/yyyy)"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 8
-y 136
-w 184
-h 24
-font "arial-bold-r-16.0"
-fgColor index 14
-bgColor index 3
-useDisplayBg
-value {
-  "Set Time (hh:mm:ss)"
-}
-endObjectProperties
-
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 192
-y 128
-w 112
-h 40
-controlPv "$(tmon):SET:TIME"
-fgColor index 25
-fgAlarm
-bgColor index 3
-fill
-font "arial-medium-r-16.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 8
-y 232
+x 488
+y 80
 w 80
 h 24
 fgColor index 25
@@ -614,11 +246,1254 @@ onColor index 3
 offColor index 3
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(tmon):RESEED.PROC"
+controlPv "$(tctrlr):DMD:RESEED.PROC"
 pressValue "1"
 onLabel "proc..."
 offLabel "Reseed"
 3d
 font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 424
+y 312
+w 80
+h 24
+font "arial-bold-r-20.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Loop 2"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 192
+y 312
+w 80
+h 24
+font "arial-bold-r-20.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Loop 1"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 440
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:SETPOINT"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 440
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:SETPOINT"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 144
+y 436
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP1:SETPOINT"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 360
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Type"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 360
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:LOOPTYPE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 360
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:LOOPTYPE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 384
+y 436
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP2:SETPOINT"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 440
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Target Temp."
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 400
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:LOOPSOURCE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 400
+w 112
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Input Channel"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 400
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:LOOPSOURCE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 480
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:PGAIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 384
+y 476
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP2:PGAIN"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 480
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:PGAIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 144
+y 476
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP1:PGAIN"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 480
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "PID P Term"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 520
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:IGAIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 384
+y 516
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP2:IGAIN"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 520
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:IGAIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 144
+y 516
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP1:IGAIN"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 520
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "PID I Term"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 560
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:DGAIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 384
+y 556
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP2:DGAIN"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 560
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:DGAIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 144
+y 556
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP1:DGAIN"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 560
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "PID D Term"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 144
+y 336
+w 80
+h 24
+font "arial-medium-r-10.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Demand"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 336
+w 80
+h 24
+font "arial-medium-r-10.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Readback"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 336
+w 80
+h 24
+font "arial-medium-r-10.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Readback"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 384
+y 336
+w 80
+h 24
+font "arial-medium-r-10.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Demand"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 600
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:LOOPRAMP"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 600
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:LOOPRAMP"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 600
+w 112
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Ramping"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 640
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:RAMPRATE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 384
+y 636
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP2:RAMPRATE"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 640
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:RAMPRATE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 640
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Ramp Rate"
+}
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 144
+y 636
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP1:RAMPRATE"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 144
+y 80
+w 80
+h 24
+fgColor index 25
+onColor index 3
+offColor index 3
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tctrlr):DMD:STATS:RESET.PROC"
+pressValue "1"
+onLabel "proc..."
+offLabel "Reset"
+3d
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 384
+y 248
+w 88
+h 24
+controlPv "$(device):STS:$(record2):MIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 144
+y 248
+w 88
+h 24
+controlPv "$(device):STS:$(record1):MIN"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 248
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Min. & Max."
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 248
+w 88
+h 24
+controlPv "$(device):STS:$(record2):MAX"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 248
+w 88
+h 24
+controlPv "$(device):STS:$(record1):MAX"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 280
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Slope & Offset"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 280
+w 88
+h 24
+controlPv "$(device):STS:$(record2):OFFSET"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 384
+y 280
+w 88
+h 24
+controlPv "$(device):STS:$(record2):SLOPE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 280
+w 88
+h 24
+controlPv "$(device):STS:$(record1):OFFSET"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 144
+y 280
+w 88
+h 24
+controlPv "$(device):STS:$(record1):SLOPE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 80
+w 88
+h 24
+controlPv "$(tctrlr):STS:STATS:TIME"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 80
+w 96
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Sample time"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 376
+y 80
+w 110
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Averaging Filter"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 488
+y 216
+w 88
+h 24
+controlPv "$(device):STS:$(record2):VARIANCE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 248
+y 216
+w 88
+h 24
+controlPv "$(device):STS:$(record1):VARIANCE"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 216
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Variance"
+}
 endObjectProperties
 

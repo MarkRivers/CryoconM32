@@ -5,21 +5,19 @@
 #! DBDEND
 
 
-record(ai, "$(tmon):$(sensor):RAW") {
-  field(DESC, "Raw Sensor Reading")
-  field(DTYP, "stream")
-  field(INP, "@M32.protocol sensorraw($(sensor)) $(port)")
-#  field(EGU, "Ohms")
-  field(SCAN, "$(scan) second")
+
+record(stringin, "$(device):STS:$(record):UNITS") {
+  field(DESC, "Temp. units.")
   field(PINI, "YES")
-  field(PREC, "3")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getTempUnits($(sensor)) $(port)")
 }
 
 # % archiver 10 Monitor
-record(ai, "$(device):$(record)") {
+record(ai, "$(device):STS:$(record)") {
   field(DESC, "Sensor Temperature")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol temp($(sensor)) $(port)")
+  field(INP, "@M32.protocol getTemp($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "$(scan) second")
   field(PINI, "YES")
@@ -35,7 +33,75 @@ record(ai, "$(device):$(record)") {
   field(LSV, "MAJOR")
 }
 
+record(ai, "$(tctrlr):STS:$(sensor):RAW") {
+  field(DESC, "Raw Sensor Reading")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getSensorraw($(sensor)) $(port)")
+#  field(EGU, "Ohms")
+  field(SCAN, "$(scan) second")
+  field(PINI, "YES")
+  field(PREC, "3")
+}
+
+
+record(ai, "$(device):STS:$(record):MIN") {
+  field(DESC, "Minimum Sensor Temp.")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getTempMin($(sensor)) $(port)")
+  field(EGU, "$(egu)")
+  field(SCAN, "5 second")
+  field(PINI, "YES")
+  field(ADEL, "$(adel)")
+  field(PREC, "3")
+}
+
+record(ai, "$(device):STS:$(record):MAX") {
+  field(DESC, "Maximum Sensor Temp.")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getTempMax($(sensor)) $(port)")
+  field(EGU, "$(egu)")
+  field(SCAN, "5 second")
+  field(PINI, "YES")
+  field(PREC, "3")
+}
+
+
+record(ai, "$(device):STS:$(record):VARIANCE") {
+  field(DESC, "Variance in Sensor Temp.")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getTempVariance($(sensor)) $(port)")
+  field(EGU, "$(egu)")
+  field(PINI, "YES")
+  field(PREC, "3")
+}
+
+record(ai, "$(device):STS:$(record):SLOPE") {
+  field(DESC, "Slope of stats line fit.")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getTempSlope($(sensor)) $(port)")
+  field(EGU, "$(egu)")
+  field(SCAN, "5 second")
+  field(PINI, "YES")
+  field(PREC, "3")
+}
+
+record(ai, "$(device):STS:$(record):OFFSET") {
+  field(DESC, "Offset of stats line fit.")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getTempOffset($(sensor)) $(port)")
+  field(EGU, "$(egu)")
+  field(SCAN, "5 second")
+  field(PINI, "YES")
+  field(PREC, "3")
+}
+
 #! Further lines contain data used by VisualDCT
 #! View(0,0,1.0)
-#! Record("$(tmon):$(sensor):RAW",20,20,0,0,"$(tmon):$(sensor):RAW")
-#! Record("$(device):$(record)",220,21,0,0,"$(device):$(record)")
+#! Record("$(device):STS:$(record):UNITS",480,48,0,1,"$(device):STS:$(record):UNITS")
+#! Record("$(device):STS:$(record)",220,21,0,0,"$(device):STS:$(record)")
+#! Record("$(tctrlr):STS:$(sensor):RAW",20,20,0,0,"$(tctrlr):STS:$(sensor):RAW")
+#! Record("$(device):STS:$(record):MIN",480,232,0,1,"$(device):STS:$(record):MIN")
+#! Record("$(device):STS:$(record):MAX",480,426,0,1,"$(device):STS:$(record):MAX")
+#! Record("$(device):STS:$(record):VARIANCE",720,260,0,1,"$(device):STS:$(record):VARIANCE")
+#! Record("$(device):STS:$(record):SLOPE",720,446,0,1,"$(device):STS:$(record):SLOPE")
+#! Record("$(device):STS:$(record):OFFSET",720,646,0,1,"$(device):STS:$(record):OFFSET")

@@ -13,6 +13,7 @@ include $(TOP)/configure/CONFIG
 #
 DB += M32_system.template
 DB += M32_sensor.template
+DB += M32_control.template
 
 include $(TOP)/configure/RULES
 #----------------------------------------

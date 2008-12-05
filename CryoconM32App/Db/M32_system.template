@@ -5,80 +5,82 @@
 #! DBDEND
 
 
-record(stringin, "$(tmon):DATE") {
-  field(DESC, "System Date")
+record(ai, "$(tctrlr):STS:STATS:TIME") {
+  field(DESC, "Sample Time for stats.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol date $(port)")
+  field(INP, "@M32.protocol getStatsTime $(port)")
+  field(EGU, "s")
+}
+
+record(ao, "$(tctrlr):DMD:STATS:RESET") {
+  field(DESC, "Rezero statistics collected.")
+  field(DTYP, "stream")
+  field(FLNK, "$(tctrlr):STS:STATS:TIME")
+  field(OUT, "@M32.protocol resetStats $(port)")
+  field(EGU, "s")
+}
+
+
+record(ai, "$(tctrlr):STS:SINKTEMP") {
+  field(DESC, "Temp of the heat sink.")
+  field(PINI, "YES")
+  field(INP, "@M32.protocol getSinkT $(port)")
+  field(PREC, "3")
+  field(EGU, "$(egu)")
+}
+
+record(stringin, "$(tctrlr):STS:AMBIENTTEMP") {
+  field(DESC, "Temp inside M32 unit.")
+  field(SCAN, "5 second")
+  field(PINI, "YES")
+  field(INP, "@M32.protocol getAmbientT $(port)")
+}
+
+record(stringin, "$(tctrlr):SYS:MODEL") {
+  field(DESC, "Full model, fw & hw info.")
+  field(DTYP, "stream")
+  field(INP, "@M32.protocol getModel $(port)")
   field(PINI, "YES")
 }
 
-record(stringout, "$(tmon):SET:DATE") {
-  field(DESC, "Set System Date")
-  field(DTYP, "stream")
-  field(OUT, "@M32.protocol setdate $(port)")
-  field(FLNK, "$(tmon):DATE")
-}
 
-record(stringin, "$(tmon):TIME") {
-  field(DESC, "System Time")
+record(stringin, "$(tctrlr):SYS:CONTROLLERNAME") {
+  field(DESC, "Name of this controller.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol time $(port)")
+  field(INP, "@M32.protocol getControllerName $(port)")
   field(PINI, "YES")
 }
 
-record(stringout, "$(tmon):SET:TIME") {
-  field(DESC, "Set System Time")
-  field(DTYP, "stream")
-  field(OUT, "@M32.protocol settime $(port)")
-  field(FLNK, "$(tmon):TIME")
-}
-
-record(stringin, "$(tmon):IPAD") {
-  field(DESC, "IP Address")
-  field(DTYP, "stream")
-  field(INP, "@M32.protocol ipaddress $(port)")
-  field(PINI, "YES")
-}
-
-record(stringin, "$(tmon):MAC") {
-  field(DESC, "MAC Address")
-  field(DTYP, "stream")
-  field(INP, "@M32.protocol macaddress $(port)")
-  field(PINI, "YES")
-}
-
-record(stringout, "$(tmon):RESEED") {
-  field(DESC, "Reseed Ave Filter")
-  field(DTYP, "stream")
-  field(OUT, "@M32.protocol reseed $(port)")
-}
-
-record(stringin, "$(tmon):FWREV") {
+record(stringin, "$(tctrlr):SYS:FWREV") {
   field(DESC, "Firmware Revision Level")
   field(DTYP, "stream")
   field(INP, "@M32.protocol getFirmwareRev $(port)")
   field(PINI, "YES")
 }
 
-record(stringin, "$(tmon):HWREV") {
+record(stringin, "$(tctrlr):SYS:HWREV") {
   field(DESC, "Hardware Revision Level")
   field(DTYP, "stream")
   field(INP, "@M32.protocol getHardwareRev $(port)")
   field(PINI, "YES")
 }
 
+record(stringout, "$(tctrlr):DMD:RESEED") {
+  field(DESC, "Reseed Ave Filter")
+  field(DTYP, "stream")
+  field(OUT, "@M32.protocol reseed $(port)")
+}
+
 #! Further lines contain data used by VisualDCT
-#! View(0,200,1.0)
-#! Record("$(tmon):DATE",300,8,0,0,"$(tmon):DATE")
-#! Record("$(tmon):SET:DATE",40,8,0,0,"$(tmon):SET:DATE")
-#! Field("$(tmon):SET:DATE.FLNK",16777215,1,"$(tmon):SET:DATE.FLNK")
-#! Link("$(tmon):SET:DATE.FLNK","$(tmon):DATE")
-#! Record("$(tmon):TIME",300,148,0,0,"$(tmon):TIME")
-#! Record("$(tmon):SET:TIME",40,148,0,0,"$(tmon):SET:TIME")
-#! Field("$(tmon):SET:TIME.FLNK",16777215,1,"$(tmon):SET:TIME.FLNK")
-#! Link("$(tmon):SET:TIME.FLNK","$(tmon):TIME")
-#! Record("$(tmon):IPAD",40,288,0,0,"$(tmon):IPAD")
-#! Record("$(tmon):MAC",300,288,0,0,"$(tmon):MAC")
-#! Record("$(tmon):RESEED",40,422,0,1,"$(tmon):RESEED")
-#! Record("$(tmon):FWREV",300,428,0,1,"$(tmon):FWREV")
-#! Record("$(tmon):HWREV",300,588,0,1,"$(tmon):HWREV")
+#! View(0,0,1.0)
+#! Record("$(tctrlr):STS:STATS:TIME",640,688,0,0,"$(tctrlr):STS:STATS:TIME")
+#! Record("$(tctrlr):DMD:STATS:RESET",360,614,0,1,"$(tctrlr):DMD:STATS:RESET")
+#! Field("$(tctrlr):DMD:STATS:RESET.FLNK",16777215,1,"$(tctrlr):DMD:STATS:RESET.FLNK")
+#! Link("$(tctrlr):DMD:STATS:RESET.FLNK","$(tctrlr):STS:STATS:TIME")
+#! Record("$(tctrlr):STS:SINKTEMP",720,414,0,1,"$(tctrlr):STS:SINKTEMP")
+#! Record("$(tctrlr):STS:AMBIENTTEMP",720,268,0,1,"$(tctrlr):STS:AMBIENTTEMP")
+#! Record("$(tctrlr):SYS:MODEL",340,48,0,1,"$(tctrlr):SYS:MODEL")
+#! Record("$(tctrlr):SYS:CONTROLLERNAME",380,208,0,1,"$(tctrlr):SYS:CONTROLLERNAME")
+#! Record("$(tctrlr):SYS:FWREV",80,248,0,1,"$(tctrlr):SYS:FWREV")
+#! Record("$(tctrlr):SYS:HWREV",80,408,0,1,"$(tctrlr):SYS:HWREV")
+#! Record("$(tctrlr):DMD:RESEED",60,82,0,1,"$(tctrlr):DMD:RESEED")
