@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1010
-y 279
+x 1070
+y 171
 w 642
 h 788
 font "arial-medium-r-18.0"
@@ -169,7 +169,7 @@ major 4
 minor 1
 release 0
 x 512
-y 680
+y 704
 w 56
 h 24
 fgColor index 46
