@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1075
-y 193
+x 1080
+y 215
 w 310
 h 280
 font "arial-medium-r-18.0"
@@ -471,6 +471,9 @@ botShadowColor index 14
 font "arial-medium-r-12.0"
 buttonLabel "More..."
 numPvs 4
-numDsps 0
+numDsps 1
+displayFileName {
+  0 "CryoconM32_detail.edl"
+}
 endObjectProperties
 
