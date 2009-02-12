@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1080
-y 215
+x 1090
+y 259
 w 310
 h 280
 font "arial-medium-r-18.0"
@@ -41,7 +41,7 @@ fgColor index 14
 bgColor index 6
 useDisplayBg
 value {
-  "$(tctrlr)"
+  "$(tctrlr) Temp. Controller"
 }
 endObjectProperties
 
@@ -464,7 +464,7 @@ x 210
 y 240
 w 80
 h 24
-fgColor index 14
+fgColor index 43
 bgColor index 3
 topShadowColor index 0
 botShadowColor index 14
