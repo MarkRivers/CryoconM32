@@ -38,7 +38,7 @@ h 32
 font "arial-medium-r-16.0"
 fontAlign "center"
 fgColor index 14
-bgColor index 61
+bgColor index 48
 value {
   "$(tctrlr) TEMPERATURE CONTROLLER"
 }
