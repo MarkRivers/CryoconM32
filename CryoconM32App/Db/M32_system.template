@@ -8,7 +8,7 @@
 record(ai, "$(tctrlr):STS:STATS:TIME") {
   field(DESC, "Sample Time for stats.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getStatsTime $(port)")
+  field(INP, "@CryoconM32.protocol getStatsTime $(port)")
   field(EGU, "s")
 }
 
@@ -16,7 +16,7 @@ record(ao, "$(tctrlr):DMD:STATS:RESET") {
   field(DESC, "Rezero statistics collected.")
   field(DTYP, "stream")
   field(FLNK, "$(tctrlr):STS:STATS:TIME")
-  field(OUT, "@M32.protocol resetStats $(port)")
+  field(OUT, "@CryoconM32.protocol resetStats $(port)")
   field(EGU, "s")
 }
 
@@ -24,7 +24,7 @@ record(ao, "$(tctrlr):DMD:STATS:RESET") {
 record(ai, "$(tctrlr):STS:SINKTEMP") {
   field(DESC, "Temp of the heat sink.")
   field(PINI, "YES")
-  field(INP, "@M32.protocol getSinkT $(port)")
+  field(INP, "@CryoconM32.protocol getSinkT $(port)")
   field(PREC, "3")
   field(EGU, "$(egu)")
 }
@@ -33,13 +33,13 @@ record(stringin, "$(tctrlr):STS:AMBIENTTEMP") {
   field(DESC, "Temp inside M32 unit.")
   field(SCAN, "5 second")
   field(PINI, "YES")
-  field(INP, "@M32.protocol getAmbientT $(port)")
+  field(INP, "@CryoconM32.protocol getAmbientT $(port)")
 }
 
 record(stringin, "$(tctrlr):SYS:MODEL") {
   field(DESC, "Full model, fw & hw info.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getModel $(port)")
+  field(INP, "@CryoconM32.protocol getModel $(port)")
   field(PINI, "YES")
 }
 
@@ -47,28 +47,28 @@ record(stringin, "$(tctrlr):SYS:MODEL") {
 record(stringin, "$(tctrlr):SYS:CONTROLLERNAME") {
   field(DESC, "Name of this controller.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getControllerName $(port)")
+  field(INP, "@CryoconM32.protocol getControllerName $(port)")
   field(PINI, "YES")
 }
 
 record(stringin, "$(tctrlr):SYS:FWREV") {
   field(DESC, "Firmware Revision Level")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getFirmwareRev $(port)")
+  field(INP, "@CryoconM32.protocol getFirmwareRev $(port)")
   field(PINI, "YES")
 }
 
 record(stringin, "$(tctrlr):SYS:HWREV") {
   field(DESC, "Hardware Revision Level")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getHardwareRev $(port)")
+  field(INP, "@CryoconM32.protocol getHardwareRev $(port)")
   field(PINI, "YES")
 }
 
 record(stringout, "$(tctrlr):DMD:RESEED") {
   field(DESC, "Reseed Ave Filter")
   field(DTYP, "stream")
-  field(OUT, "@M32.protocol reseed $(port)")
+  field(OUT, "@CryoconM32.protocol reseed $(port)")
 }
 
 #! Further lines contain data used by VisualDCT

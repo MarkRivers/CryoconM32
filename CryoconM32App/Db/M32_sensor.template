@@ -10,14 +10,14 @@ record(stringin, "$(device):STS:$(record):UNITS") {
   field(DESC, "Temp. units.")
   field(PINI, "YES")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTempUnits($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTempUnits($(sensor)) $(port)")
 }
 
 # % archiver 10 Monitor
 record(ai, "$(device):STS:$(record)") {
   field(DESC, "Sensor Temperature")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTemp($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTemp($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "$(scan) second")
   field(PINI, "YES")
@@ -36,7 +36,7 @@ record(ai, "$(device):STS:$(record)") {
 record(ai, "$(tctrlr):STS:$(sensor):RAW") {
   field(DESC, "Raw Sensor Reading")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getSensorraw($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getSensorraw($(sensor)) $(port)")
 #  field(EGU, "Ohms")
   field(SCAN, "$(scan) second")
   field(PINI, "YES")
@@ -47,7 +47,7 @@ record(ai, "$(tctrlr):STS:$(sensor):RAW") {
 record(ai, "$(device):STS:$(record):MIN") {
   field(DESC, "Minimum Sensor Temp.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTempMin($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTempMin($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "5 second")
   field(PINI, "YES")
@@ -58,7 +58,7 @@ record(ai, "$(device):STS:$(record):MIN") {
 record(ai, "$(device):STS:$(record):MAX") {
   field(DESC, "Maximum Sensor Temp.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTempMax($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTempMax($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "5 second")
   field(PINI, "YES")
@@ -69,7 +69,7 @@ record(ai, "$(device):STS:$(record):MAX") {
 record(ai, "$(device):STS:$(record):VARIANCE") {
   field(DESC, "Variance in Sensor Temp.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTempVariance($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTempVariance($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(PINI, "YES")
   field(PREC, "3")
@@ -78,7 +78,7 @@ record(ai, "$(device):STS:$(record):VARIANCE") {
 record(ai, "$(device):STS:$(record):SLOPE") {
   field(DESC, "Slope of stats line fit.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTempSlope($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTempSlope($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "5 second")
   field(PINI, "YES")
@@ -88,7 +88,7 @@ record(ai, "$(device):STS:$(record):SLOPE") {
 record(ai, "$(device):STS:$(record):OFFSET") {
   field(DESC, "Offset of stats line fit.")
   field(DTYP, "stream")
-  field(INP, "@M32.protocol getTempOffset($(sensor)) $(port)")
+  field(INP, "@CryoconM32.protocol getTempOffset($(sensor)) $(port)")
   field(EGU, "$(egu)")
   field(SCAN, "5 second")
   field(PINI, "YES")
