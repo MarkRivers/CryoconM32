@@ -148,7 +148,7 @@ record(dfanout, "$(tctrlr):DFAN:LOOP$(loop):RAMPRATELIM") {
 # using either channel for its input.
 record(scalcout, "$(tctrlr):CLC:LOOP$(loop):SRCRECORD") {
   field(DESC, "Map channel to PV name atom.")
-  field(CALC, "(AA=='CHA')?'T1':'T2'")
+  field(CALC, "(AA='CHA')?'T1':'T2'")
   field(INAA, "$(tctrlr):STS:LOOP$(loop):LOOPSOURCE NPP MS")
   field(OUT, "$(tctrlr):CLC:LOOP$(loop):SLOPELIMPVNAME.AA PP MS")
 }
