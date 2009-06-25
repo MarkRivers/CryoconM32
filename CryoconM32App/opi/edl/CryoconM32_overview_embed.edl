@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1095
-y 281
+x 343
+y 2005
 w 310
 h 280
 font "arial-medium-r-18.0"
@@ -31,17 +31,17 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 0
-y 0
+x 8
+y 8
 w 304
 h 30
 font "arial-medium-r-16.0"
-fontAlign "center"
 fgColor index 14
 bgColor index 6
 useDisplayBg
 value {
-  "$(tctrlr) Temp. Controller"
+  "$(tctrlr)"
+  "Temperature Controller"
 }
 endObjectProperties
 
@@ -51,8 +51,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 110
-y 40
+x 112
+y 48
 w 96
 h 30
 font "arial-bold-r-12.0"
@@ -71,8 +71,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 10
-y 70
+x 8
+y 80
 w 90
 h 20
 font "arial-bold-r-12.0"
@@ -90,8 +90,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 210
-y 40
+x 208
+y 48
 w 104
 h 30
 font "arial-bold-r-12.0"
@@ -110,8 +110,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 110
-y 70
+x 112
+y 80
 w 88
 h 20
 controlPv "$(device):STS:$(record1)"
@@ -135,8 +135,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 210
-y 70
+x 208
+y 80
 w 88
 h 20
 controlPv "$(device):STS:$(record2)"
@@ -160,8 +160,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 210
-y 100
+x 208
+y 112
 w 80
 h 20
 font "arial-bold-r-12.0"
@@ -179,8 +179,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 110
-y 100
+x 112
+y 112
 w 80
 h 20
 font "arial-bold-r-12.0"
@@ -198,8 +198,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 110
-y 207
+x 112
+y 216
 w 88
 h 20
 controlPv "$(tctrlr):STS:LOOP1:SETPOINT"
@@ -223,8 +223,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 210
-y 207
+x 208
+y 216
 w 88
 h 20
 controlPv "$(tctrlr):STS:LOOP2:SETPOINT"
@@ -248,8 +248,8 @@ beginObjectProperties
 major 10
 minor 0
 release 0
-x 110
-y 170
+x 112
+y 176
 w 88
 h 32
 controlPv "$(tctrlr):DMD:LOOP1:SETPOINT"
@@ -267,8 +267,8 @@ beginObjectProperties
 major 10
 minor 0
 release 0
-x 210
-y 170
+x 208
+y 176
 w 88
 h 32
 controlPv "$(tctrlr):DMD:LOOP2:SETPOINT"
@@ -286,8 +286,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 10
-y 170
+x 8
+y 176
 w 90
 h 30
 font "arial-bold-r-12.0"
@@ -306,8 +306,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 110
-y 145
+x 112
+y 152
 w 88
 h 20
 controlPv "$(tctrlr):STS:LOOP1:LOOPSOURCE"
@@ -330,8 +330,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 10
-y 145
+x 8
+y 152
 w 90
 h 20
 font "arial-bold-r-12.0"
@@ -349,8 +349,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 210
-y 145
+x 208
+y 152
 w 88
 h 20
 controlPv "$(tctrlr):STS:LOOP2:LOOPSOURCE"
@@ -373,8 +373,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 210
-y 120
+x 208
+y 128
 w 88
 h 20
 controlPv "$(tctrlr):STS:LOOP2:LOOPRAMP"
@@ -397,8 +397,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 110
-y 120
+x 112
+y 128
 w 88
 h 20
 controlPv "$(tctrlr):STS:LOOP1:LOOPRAMP"
@@ -421,8 +421,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 10
-y 120
+x 8
+y 128
 w 90
 h 20
 font "arial-bold-r-12.0"
@@ -440,8 +440,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 10
-y 207
+x 8
+y 216
 w 90
 h 30
 font "arial-bold-r-12.0"
@@ -460,15 +460,15 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 210
-y 240
+x 208
+y 248
 w 80
 h 20
 fgColor index 43
 bgColor index 3
 topShadowColor index 0
 botShadowColor index 14
-font "arial-medium-r-12.0"
+font "arial-bold-r-14.0"
 buttonLabel "More..."
 numPvs 4
 numDsps 1
