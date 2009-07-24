@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1070
-y 171
-w 642
-h 788
+x 537
+y 22
+w 588
+h 710
 font "arial-medium-r-18.0"
 ctlFont "arial-medium-r-18.0"
 btnFont "arial-medium-r-18.0"
@@ -50,17 +50,16 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 192
-y 112
-w 96
+x 144
+y 96
+w 200
 h 32
 font "arial-bold-r-16.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
 value {
-  "Sensor"
-  "Channel A"
+  "Sensor Channel A"
 }
 endObjectProperties
 
@@ -71,7 +70,7 @@ major 4
 minor 1
 release 0
 x 16
-y 152
+y 128
 w 96
 h 24
 font "arial-bold-r-14.0"
@@ -90,7 +89,7 @@ major 4
 minor 1
 release 0
 x 16
-y 184
+y 160
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -109,7 +108,7 @@ major 10
 minor 0
 release 0
 x 248
-y 152
+y 128
 w 88
 h 24
 controlPv "$(tctrlr):STS:A:RAW"
@@ -129,7 +128,7 @@ major 10
 minor 0
 release 0
 x 488
-y 152
+y 128
 w 88
 h 24
 controlPv "$(tctrlr):STS:B:RAW"
@@ -148,17 +147,16 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 424
-y 112
-w 104
+x 384
+y 96
+w 184
 h 32
 font "arial-bold-r-16.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
 value {
-  "Sensor "
-  "Channel B"
+  "Sensor Channel B"
 }
 endObjectProperties
 
@@ -168,8 +166,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 512
-y 704
+x 520
+y 672
 w 56
 h 24
 fgColor index 46
@@ -185,10 +183,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 184
+y 160
 w 88
 h 24
 controlPv "$(device):STS:$(record1)"
@@ -204,16 +202,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 184
+y 160
 w 88
 h 24
 controlPv "$(device):STS:$(record2)"
@@ -229,6 +228,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Message Button)
@@ -237,8 +237,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 488
-y 80
+x 496
+y 48
 w 80
 h 24
 fgColor index 25
@@ -260,11 +260,11 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 424
-y 312
+x 432
+y 304
 w 80
 h 24
-font "arial-bold-r-20.0"
+font "arial-bold-r-16.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
@@ -280,10 +280,10 @@ major 4
 minor 1
 release 0
 x 192
-y 312
+y 304
 w 80
 h 24
-font "arial-bold-r-20.0"
+font "arial-bold-r-16.0"
 fgColor index 14
 bgColor index 6
 useDisplayBg
@@ -296,10 +296,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 440
+y 432
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:SETPOINT"
@@ -315,16 +315,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 440
+y 432
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:SETPOINT"
@@ -340,6 +341,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -349,7 +351,7 @@ major 10
 minor 0
 release 0
 x 144
-y 436
+y 432
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:SETPOINT"
@@ -368,7 +370,7 @@ major 4
 minor 1
 release 0
 x 16
-y 360
+y 352
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -384,10 +386,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 360
+y 352
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:LOOPTYPE"
@@ -402,16 +404,17 @@ useHexPrefix
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 360
+y 352
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:LOOPTYPE"
@@ -426,6 +429,7 @@ useHexPrefix
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -435,7 +439,7 @@ major 10
 minor 0
 release 0
 x 384
-y 436
+y 432
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:SETPOINT"
@@ -454,7 +458,7 @@ major 4
 minor 1
 release 0
 x 16
-y 440
+y 432
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -470,10 +474,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 400
+y 392
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:LOOPSOURCE"
@@ -488,6 +492,7 @@ useHexPrefix
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -497,7 +502,7 @@ major 4
 minor 1
 release 0
 x 16
-y 400
+y 392
 w 112
 h 24
 font "arial-bold-r-14.0"
@@ -513,10 +518,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 400
+y 392
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:LOOPSOURCE"
@@ -531,16 +536,17 @@ useHexPrefix
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 480
+y 472
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:PGAIN"
@@ -556,6 +562,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -565,7 +572,7 @@ major 10
 minor 0
 release 0
 x 384
-y 476
+y 472
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:PGAIN"
@@ -581,10 +588,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 480
+y 472
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:PGAIN"
@@ -600,6 +607,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -609,7 +617,7 @@ major 10
 minor 0
 release 0
 x 144
-y 476
+y 472
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:PGAIN"
@@ -628,7 +636,7 @@ major 4
 minor 1
 release 0
 x 16
-y 480
+y 472
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -644,10 +652,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 520
+y 512
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:IGAIN"
@@ -663,6 +671,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -672,7 +681,7 @@ major 10
 minor 0
 release 0
 x 384
-y 516
+y 512
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:IGAIN"
@@ -688,10 +697,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 520
+y 512
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:IGAIN"
@@ -707,6 +716,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -716,7 +726,7 @@ major 10
 minor 0
 release 0
 x 144
-y 516
+y 512
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:IGAIN"
@@ -735,7 +745,7 @@ major 4
 minor 1
 release 0
 x 16
-y 520
+y 512
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -751,10 +761,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 560
+y 552
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:DGAIN"
@@ -770,6 +780,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -779,7 +790,7 @@ major 10
 minor 0
 release 0
 x 384
-y 556
+y 552
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:DGAIN"
@@ -795,10 +806,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 560
+y 552
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:DGAIN"
@@ -814,6 +825,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -823,7 +835,7 @@ major 10
 minor 0
 release 0
 x 144
-y 556
+y 552
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:DGAIN"
@@ -842,7 +854,7 @@ major 4
 minor 1
 release 0
 x 16
-y 560
+y 552
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -861,7 +873,7 @@ major 4
 minor 1
 release 0
 x 144
-y 336
+y 328
 w 80
 h 24
 font "arial-medium-r-10.0"
@@ -880,7 +892,7 @@ major 4
 minor 1
 release 0
 x 248
-y 336
+y 328
 w 80
 h 24
 font "arial-medium-r-10.0"
@@ -899,7 +911,7 @@ major 4
 minor 1
 release 0
 x 488
-y 336
+y 328
 w 80
 h 24
 font "arial-medium-r-10.0"
@@ -918,7 +930,7 @@ major 4
 minor 1
 release 0
 x 384
-y 336
+y 328
 w 80
 h 24
 font "arial-medium-r-10.0"
@@ -934,10 +946,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 600
+y 592
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:LOOPRAMP"
@@ -952,16 +964,17 @@ useHexPrefix
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 600
+y 592
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:LOOPRAMP"
@@ -976,6 +989,7 @@ useHexPrefix
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -985,7 +999,7 @@ major 4
 minor 1
 release 0
 x 16
-y 600
+y 592
 w 112
 h 24
 font "arial-bold-r-14.0"
@@ -1001,10 +1015,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 640
+y 632
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:RAMPRATE"
@@ -1020,6 +1034,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Textentry)
@@ -1029,7 +1044,7 @@ major 10
 minor 0
 release 0
 x 384
-y 636
+y 632
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:RAMPRATE"
@@ -1045,10 +1060,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 640
+y 632
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:RAMPRATE"
@@ -1064,6 +1079,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -1073,7 +1089,7 @@ major 4
 minor 1
 release 0
 x 16
-y 640
+y 632
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -1092,7 +1108,7 @@ major 10
 minor 0
 release 0
 x 144
-y 636
+y 632
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:RAMPRATE"
@@ -1111,7 +1127,7 @@ major 4
 minor 0
 release 0
 x 144
-y 80
+y 48
 w 80
 h 24
 fgColor index 25
@@ -1131,10 +1147,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 384
-y 248
+y 224
 w 88
 h 24
 controlPv "$(device):STS:$(record2):MIN"
@@ -1150,16 +1166,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 144
-y 248
+y 224
 w 88
 h 24
 controlPv "$(device):STS:$(record1):MIN"
@@ -1175,6 +1192,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -1184,7 +1202,7 @@ major 4
 minor 1
 release 0
 x 16
-y 248
+y 224
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -1200,10 +1218,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 248
+y 224
 w 88
 h 24
 controlPv "$(device):STS:$(record2):MAX"
@@ -1219,16 +1237,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 248
+y 224
 w 88
 h 24
 controlPv "$(device):STS:$(record1):MAX"
@@ -1244,6 +1263,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -1253,7 +1273,7 @@ major 4
 minor 1
 release 0
 x 16
-y 280
+y 256
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -1269,10 +1289,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 280
+y 256
 w 88
 h 24
 controlPv "$(device):STS:$(record2):OFFSET"
@@ -1288,16 +1308,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 384
-y 280
+y 256
 w 88
 h 24
 controlPv "$(device):STS:$(record2):SLOPE"
@@ -1313,16 +1334,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 280
+y 256
 w 88
 h 24
 controlPv "$(device):STS:$(record1):OFFSET"
@@ -1338,16 +1360,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 144
-y 280
+y 256
 w 88
 h 24
 controlPv "$(device):STS:$(record1):SLOPE"
@@ -1363,16 +1386,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 80
+y 48
 w 88
 h 24
 controlPv "$(tctrlr):STS:STATS:TIME"
@@ -1388,6 +1412,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -1397,7 +1422,7 @@ major 4
 minor 1
 release 0
 x 16
-y 80
+y 48
 w 96
 h 24
 font "arial-bold-r-14.0"
@@ -1416,7 +1441,7 @@ major 4
 minor 1
 release 0
 x 376
-y 80
+y 48
 w 110
 h 24
 font "arial-bold-r-14.0"
@@ -1432,10 +1457,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 488
-y 216
+y 192
 w 88
 h 24
 controlPv "$(device):STS:$(record2):VARIANCE"
@@ -1451,16 +1476,17 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 4
 release 0
 x 248
-y 216
+y 192
 w 88
 h 24
 controlPv "$(device):STS:$(record1):VARIANCE"
@@ -1476,6 +1502,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -1485,7 +1512,7 @@ major 4
 minor 1
 release 0
 x 16
-y 216
+y 192
 w 104
 h 24
 font "arial-bold-r-14.0"
