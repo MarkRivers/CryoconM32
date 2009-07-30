@@ -4,7 +4,7 @@
 #! DBD("/dls_sw/prod/R3.14.8.2/support/streamDevice/2-3dls6/dbd/stream.dbd")
 #! DBDEND
 
-
+# %gdatag,template,simplePv,$(gda_name).$(record),$(gda_desc)
 
 record(stringin, "$(device):STS:$(record):UNITS") {
   field(DESC, "Temp. units.")
@@ -14,6 +14,7 @@ record(stringin, "$(device):STS:$(record):UNITS") {
 }
 
 # % archiver 10 Monitor
+# %gdatag,pv,ro,$(gda_name).$(record),RECORD,Sensor temperature
 record(ai, "$(device):STS:$(record)") {
   field(DESC, "Sensor Temperature")
   field(DTYP, "stream")

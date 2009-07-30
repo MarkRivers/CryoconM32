@@ -5,7 +5,10 @@
 #! DBD("/dls_sw/prod/R3.14.8.2/support/calc/2-6-3dls1/dbd/calc.dbd")
 #! DBDEND
 
+# %gdatag,template,simplePv,$(gda_name).SETPOINT-DMD,$(gda_desc) setpoint demand
+# %gdatag,template,simplePv,$(gda_name).SETPOINT-RBV,$(gda_desc) setpoint readback
 
+# %gdatag,pv,ro,$(gda_name).SETPOINT-RBV,RECORD,Setpoint readback
 record(ai, "$(tctrlr):STS:LOOP$(loop):SETPOINT") {
   field(DESC, "Setpoint Temp, loop $(loop).")
   field(SCAN, "$(scan) second")
@@ -49,6 +52,7 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):RAMPRATE") {
   field(LLSV, "MINOR")
 }
 
+# %gdatag,pv,rw,$(gda_name).SETPOINT-DMD,RECORD,Setpoint demand
 record(ao, "$(tctrlr):DMD:LOOP$(loop):SETPOINT") {
   field(DESC, "Demand setpoint Temp.")
   field(DTYP, "stream")
