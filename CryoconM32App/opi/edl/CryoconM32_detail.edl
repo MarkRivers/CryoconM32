@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 537
-y 22
+x 157
+y 87
 w 588
-h 710
+h 749
 font "arial-medium-r-18.0"
 ctlFont "arial-medium-r-18.0"
 btnFont "arial-medium-r-18.0"
@@ -167,7 +167,7 @@ major 4
 minor 1
 release 0
 x 520
-y 672
+y 712
 w 56
 h 24
 fgColor index 46
@@ -299,7 +299,7 @@ major 4
 minor 4
 release 0
 x 248
-y 432
+y 472
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:SETPOINT"
@@ -325,7 +325,7 @@ major 4
 minor 4
 release 0
 x 488
-y 432
+y 472
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:SETPOINT"
@@ -351,7 +351,7 @@ major 10
 minor 0
 release 0
 x 144
-y 432
+y 472
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:SETPOINT"
@@ -439,7 +439,7 @@ major 10
 minor 0
 release 0
 x 384
-y 432
+y 472
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:SETPOINT"
@@ -458,7 +458,7 @@ major 4
 minor 1
 release 0
 x 16
-y 432
+y 472
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -546,7 +546,7 @@ major 4
 minor 4
 release 0
 x 488
-y 472
+y 512
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:PGAIN"
@@ -572,7 +572,7 @@ major 10
 minor 0
 release 0
 x 384
-y 472
+y 512
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:PGAIN"
@@ -591,7 +591,7 @@ major 4
 minor 4
 release 0
 x 248
-y 472
+y 512
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:PGAIN"
@@ -617,7 +617,7 @@ major 10
 minor 0
 release 0
 x 144
-y 472
+y 512
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:PGAIN"
@@ -636,7 +636,7 @@ major 4
 minor 1
 release 0
 x 16
-y 472
+y 512
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -655,7 +655,7 @@ major 4
 minor 4
 release 0
 x 488
-y 512
+y 552
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:IGAIN"
@@ -681,7 +681,7 @@ major 10
 minor 0
 release 0
 x 384
-y 512
+y 552
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:IGAIN"
@@ -700,7 +700,7 @@ major 4
 minor 4
 release 0
 x 248
-y 512
+y 552
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:IGAIN"
@@ -726,7 +726,7 @@ major 10
 minor 0
 release 0
 x 144
-y 512
+y 552
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:IGAIN"
@@ -745,7 +745,7 @@ major 4
 minor 1
 release 0
 x 16
-y 512
+y 552
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -764,7 +764,7 @@ major 4
 minor 4
 release 0
 x 488
-y 552
+y 592
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:DGAIN"
@@ -790,7 +790,7 @@ major 10
 minor 0
 release 0
 x 384
-y 552
+y 592
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:DGAIN"
@@ -809,7 +809,7 @@ major 4
 minor 4
 release 0
 x 248
-y 552
+y 592
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:DGAIN"
@@ -835,7 +835,7 @@ major 10
 minor 0
 release 0
 x 144
-y 552
+y 592
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:DGAIN"
@@ -854,7 +854,7 @@ major 4
 minor 1
 release 0
 x 16
-y 552
+y 592
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -949,7 +949,7 @@ major 4
 minor 4
 release 0
 x 488
-y 592
+y 632
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:LOOPRAMP"
@@ -974,7 +974,7 @@ major 4
 minor 4
 release 0
 x 248
-y 592
+y 632
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:LOOPRAMP"
@@ -999,7 +999,7 @@ major 4
 minor 1
 release 0
 x 16
-y 592
+y 632
 w 112
 h 24
 font "arial-bold-r-14.0"
@@ -1018,7 +1018,7 @@ major 4
 minor 4
 release 0
 x 488
-y 632
+y 672
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP2:RAMPRATE"
@@ -1044,7 +1044,7 @@ major 10
 minor 0
 release 0
 x 384
-y 632
+y 672
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP2:RAMPRATE"
@@ -1063,7 +1063,7 @@ major 4
 minor 4
 release 0
 x 248
-y 632
+y 672
 w 88
 h 24
 controlPv "$(tctrlr):STS:LOOP1:RAMPRATE"
@@ -1089,7 +1089,7 @@ major 4
 minor 1
 release 0
 x 16
-y 632
+y 672
 w 104
 h 24
 font "arial-bold-r-14.0"
@@ -1108,7 +1108,7 @@ major 10
 minor 0
 release 0
 x 144
-y 632
+y 672
 w 88
 h 33
 controlPv "$(tctrlr):DMD:LOOP1:RAMPRATE"
@@ -1521,6 +1521,115 @@ bgColor index 6
 useDisplayBg
 value {
   "Variance"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 488
+y 432
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP2:MANUAL"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 384
+y 432
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP2:MANUAL"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 248
+y 432
+w 88
+h 24
+controlPv "$(tctrlr):STS:LOOP1:MANUAL"
+font "arial-medium-r-14.0"
+fontAlign "right"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 144
+y 432
+w 88
+h 33
+controlPv "$(tctrlr):DMD:LOOP1:MANUAL"
+precision 3
+fgColor index 25
+fgAlarm
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 16
+y 432
+w 104
+h 24
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "Manual output"
 }
 endObjectProperties
 

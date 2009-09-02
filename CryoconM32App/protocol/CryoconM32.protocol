@@ -78,6 +78,10 @@ setLoopPGain { out "LOOP \$1:PGAIN %f" ; }
 setLoopIGain { out "LOOP \$1:IGAIN %f" ; }
 setLoopDGain { out "LOOP \$1:DGAIN %f" ; }
 
+# Manual loop control output
+getLoopManOutput { out "LOOP \$1:PMANUAL?" ; in "%f" ; }
+setLoopManOutput { out "LOOP \$1:PMANUAL %f" ; }
+
 #getHeaterCur {}
 
 # COMMANDS FOR THE SYSTEM TEMPLATE: System information

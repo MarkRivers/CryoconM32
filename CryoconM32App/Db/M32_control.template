@@ -5,9 +5,9 @@
 #! DBD("/dls_sw/prod/R3.14.8.2/support/calc/2-6-3dls1/dbd/calc.dbd")
 #! DBDEND
 
+
 # %gdatag,template,simplePv,$(gda_name).SETPOINT-DMD,$(gda_desc) setpoint demand
 # %gdatag,template,simplePv,$(gda_name).SETPOINT-RBV,$(gda_desc) setpoint readback
-
 # %gdatag,pv,ro,$(gda_name).SETPOINT-RBV,RECORD,Setpoint readback
 record(ai, "$(tctrlr):STS:LOOP$(loop):SETPOINT") {
   field(DESC, "Setpoint Temp, loop $(loop).")
@@ -133,7 +133,6 @@ record(calcout, "$(tctrlr):CLC:LOOP$(loop):RAMPRATE:LIMCK") {
   field(PREC, "3")
 }
 
-
 record(ao, "$(tctrlr):LIM:LOOP$(loop):RAMPRATE") {
   field(DESC, "Temp ramprate limit.")
   field(PINI, "NO")
@@ -189,8 +188,28 @@ record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMSFX") {
   field(VAL, ":SLOPE.HIHI")
 }
 
+
+record(ao, "$(tctrlr):DMD:LOOP$(loop):MANUAL") {
+  field(DESC, "Manual control output demand")
+  field(DTYP, "stream")
+  field(FLNK, "$(tctrlr):STS:LOOP$(loop):MANUAL")
+  field(OUT, "@CryoconM32.protocol setLoopManOutput($(loop)) $(port)")
+  field(PREC, "3")
+  field(EGU, "%")
+}
+
+
+record(ai, "$(tctrlr):STS:LOOP$(loop):MANUAL") {
+  field(DESC, "Manual control output")
+  field(SCAN, "$(scan) second")
+  field(DTYP, "stream")
+  field(INP, "@CryoconM32.protocol getLoopManOutput($(loop)) $(port)")
+  field(PREC, "3")
+  field(EGU, "%")
+}
+
 #! Further lines contain data used by VisualDCT
-#! View(1639,3248,1.3)
+#! View(1483,2621,1.3)
 #! Record("$(tctrlr):STS:LOOP$(loop):SETPOINT",1620,1774,0,1,"$(tctrlr):STS:LOOP$(loop):SETPOINT")
 #! Record("$(tctrlr):STS:LOOP$(loop):LOOPTYPE",2240,1608,0,1,"$(tctrlr):STS:LOOP$(loop):LOOPTYPE")
 #! Record("$(tctrlr):STS:LOOP$(loop):LOOPSOURCE",1840,2714,0,0,"$(tctrlr):STS:LOOP$(loop):LOOPSOURCE")
@@ -267,3 +286,7 @@ record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMSFX") {
 #! TextBox(TB0,2640,2740,2960,2800,0,"Dialog",12,1,16777215,"The output value of this calc record sets the OUTB link of the dfanout.\n\n",null)
 #! TextBox(TB2,1820,3120,2000,3220,0,"Dialog",12,1,16777215,"The only intended processing of these 3 string in records is on initialisation.\nThe FLNKs are to try to make sure the strings are all initialised before the scalcout record attempts to process.",null)
 #! TextBox(TB1,3340,2840,3520,2900,0,"Dialog",12,1,16777215,"Output link B is the HIHI limit on the SLOPE record on the sensor template.",null)
+#! Record("$(tctrlr):DMD:LOOP$(loop):MANUAL",1660,2080,0,1,"$(tctrlr):DMD:LOOP$(loop):MANUAL")
+#! Field("$(tctrlr):DMD:LOOP$(loop):MANUAL.FLNK",16777215,1,"$(tctrlr):DMD:LOOP$(loop):MANUAL.FLNK")
+#! Link("$(tctrlr):DMD:LOOP$(loop):MANUAL.FLNK","$(tctrlr):STS:LOOP$(loop):MANUAL")
+#! Record("$(tctrlr):STS:LOOP$(loop):MANUAL",1680,2260,0,1,"$(tctrlr):STS:LOOP$(loop):MANUAL")
