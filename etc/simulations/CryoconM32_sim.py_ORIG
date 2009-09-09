@@ -1,0 +1,25 @@
+#!/dls_sw/tools/bin/python2.4
+
+from pkg_resources import require
+require("dls_serial_sim==1.7")
+
+from dls_serial_sim import serial_device
+
+class CryoconM32(serial_device):
+
+    Terminator = "\n"
+    
+    def __init__(self):
+        # place your initialisation code here
+        serial_device.__init__(self)
+    
+    def reply(self,command):
+        # reply to commands here
+        return command
+
+if __name__ == "__main__":
+    # little test program, only run when this script is run from command line
+    device = CryoconM32()
+    device.start_ip(8001)
+    device.start_debug(9001)
+    raw_input()

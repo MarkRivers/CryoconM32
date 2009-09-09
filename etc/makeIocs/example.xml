@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<components arch="linux-x86">
+	<pyDrv.serial_sim_instance module="CryoconM32_sim" name="CryoconM32Sim" pyCls="CryoconM32"/>
+	<asyn.AsynIP name="CryoconM32Asyn" port="172.23.111.180:7001" simulation="CryoconM32Sim"/>
+	<CryoconM32.M32_system tctrlr="tctrlr" port="CryoconM32Asyn" egu="egu"/>
+	<pyDrv.serial_sim_instance module="CryoconM32_sim" name="CryoconM32Sim" pyCls="CryoconM32"/>
+	<asyn.AsynIP name="CryoconM32Asyn" port="172.23.111.180:7001" simulation="CryoconM32Sim"/>
+	<CryoconM32.M32_sensor record="record" device="device" sensor="sensor" port="CryoconM32Asyn" egu="egu" scan="scan" adel="adel" hihi="hihi" high="high" low="low" lolo="lolo" tctrlr="tctrlr" gda="False"/>
+	<pyDrv.serial_sim_instance module="CryoconM32_sim" name="CryoconM32Sim" pyCls="CryoconM32"/>
+	<asyn.AsynIP name="CryoconM32Asyn" port="172.23.111.180:7001" simulation="CryoconM32Sim"/>
+	<CryoconM32.M32_control tctrlr="tctrlr" loop="loop" scan="scan" port="CryoconM32Asyn" rampratelim="rampratelim" gda="False"/>
+</components>
