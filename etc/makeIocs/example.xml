@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <components arch="linux-x86">
-	<pyDrv.serial_sim_instance module="CryoconM32_sim" name="CryoconM32Sim" pyCls="CryoconM32"/>
+	<pyDrv.serial_sim_instance module="CryoconM32_sim" name="CryoconM32Sim" pyCls="CryoconM32" debug="9017"/>
 	<asyn.AsynIP name="CryoconM32Asyn" port="172.23.111.180:7001" simulation="CryoconM32Sim"/>
-	<CryoconM32.CryoconM32 name="TCTRL" port="CryoconM32Asyn" tctrlr="BLXXI-EA-TCTRL-01"/>
-	<CryoconM32.CryoconM32_sensor adel="0.02" desc="control temp" device="BLXXI-EA-TCTRL-01" egu="K" high="50" hihi="273" lolo="0" low="0" name="T1" record="T1" sensor="A" tctrlr="TCTRL"/>
-	<CryoconM32.CryoconM32_sensor adel="0.02" desc="mon temp" device="BLXXI-EA-TCTRL-01" egu="K" high="50" hihi="273" lolo="0" low="0" name="T2" record="T2" sensor="B" tctrlr="TCTRL"/>
+	<CryoconM32.CryoconM32 name="TCTRL" port="CryoconM32Asyn" tctrlr="SIM-TS-TCTRL-01"/>
+	<CryoconM32.CryoconM32_sensor adel="0.02" desc="control temp" device="SIM-TS-TCTRL-01" egu="K" high="50" hihi="273" lolo="0" low="0" name="T1" record="T1" sensor="A" tctrlr="TCTRL"/>
+	<CryoconM32.CryoconM32_sensor adel="0.02" desc="mon temp" device="SIM-TS-TCTRL-01" egu="K" high="50" hihi="273" lolo="0" low="0" name="T2" record="T2" sensor="B" tctrlr="TCTRL"/>
 	<CryoconM32.CryoconM32_control desc="Vertical temp insert" loop="1" name="VTI" rampratelim="1" tctrlr="TCTRL"/>
 	<CryoconM32.CryoconM32_control desc="Needle valve" loop="2" name="NV" rampratelim="1" tctrlr="TCTRL"/>
 </components>
