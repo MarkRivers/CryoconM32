@@ -21,31 +21,31 @@ class Sensor(object):
         self.tempOffset = 288.0
         return
 
-    def getChannel():
+    def getChannel(self):
         return self.channel
 
-    def getSensorRaw():
+    def getSensorRaw(self):
         return self.sensorRaw
 
-    def getTemp():
+    def getTemp(self):
         return self.temp
         
-    def getTempUnits():
+    def getTempUnits(self):
         return self.tempUnits
 
-    def getTempMin():
+    def getTempMin(self):
         return self.tempMin
 
-    def getTempMax():
+    def getTempMax(self):
         return self.tempMax
 
-    def getTempVariance():
+    def getTempVariance(self):
         return self.tempVariance
 
-    def getTempSlope():
+    def getTempSlope(self):
         return self.tempSlope
 
-    def getTempOffset():
+    def getTempOffset(self):
         return self.tempOffset
 
 # Another Helper class. So we can instantiate 2 objects to match the 2 instantiations of the
@@ -61,54 +61,57 @@ class Loop(object):
         self.loopPGain = 2.5
         self.loopIGain = 10.0
         self.loopDGain = 0.0
-        self.loopManOutput = "NO"
+        self.loopManOutput = 5.04
         return
 
-    def getLoopID():
+    def getLoopID(self):
         return self.loopID
 
-    def getLoopSource():
+    def getLoopSource(self):
         return "CH" + self.sensor.getChannel()
 
-    def getSetpointT():
+    def getSetpointT(self):
         return self.setpointT
     
 
-    def setSetpointT(arg_setpointT):
+    def setSetpointT(self, arg_setpointT):
         self.setpointT = arg_setpointT
         return
 
-    def getLoopType():
+    def getLoopType(self):
         return self.loopType
 
-    def getLoopRampRate():
+    def getLoopRampRate(self):
         return self.loopRampRate
 
-    def getLoopPGain():
+    def getLoopRamp(self):
+        return self.loopRamp
+
+    def getLoopPGain(self):
         return self.loopPGain
 
-    def setLoopPGain(arg_loopPGain):
+    def setLoopPGain(self, arg_loopPGain):
         self.loopPGain = arg_loopPGain
         return
 
-    def getLoopIGain():
+    def getLoopIGain(self):
         return self.loopIGain
 
-    def setLoopIGain(arg_loopIGain):
+    def setLoopIGain(self, arg_loopIGain):
         self.loopIGain = arg_loopIGain
         return
 
-    def getLoopDGain():
+    def getLoopDGain(self):
         return self.loopPGain
 
-    def setLoopDGain(arg_loopDGain):
+    def setLoopDGain(self, arg_loopDGain):
         self.loopDGain = arg_loopDGain
         return
 
-    def getLoopManOutput():
+    def getLoopManOutput(self):
         return self.loopManOutput
     
-    def setLoopManOutput(arg_loopManOutput):
+    def setLoopManOutput(self, arg_loopManOutput):
         self.loopManOutput = arg_loopManOutput
         return
 
@@ -172,31 +175,31 @@ class CryoconM32(serial_device):
         
         return
 
-    def doReseed():
+    def doReseed(self):
         return
     
-    def getFirmwareRev():
+    def getFirmwareRev(self):
         return self.firmwareRev
     
-    def getHardwareRev():
+    def getHardwareRev(self):
         return self.hardwareRev
 
-    def getModel():
+    def getModel(self):
         return self.model
 
-    def getControllerName():
+    def getControllerName(self):
         return self.controllerName
 
-    def getAmbientT():
+    def getAmbientT(self):
         return self.ambientT
     
-    def getSinkT():
+    def getSinkT(self):
         return self.sinkT
     
-    def getStatsTime():
+    def getStatsTime(self):
         return self.statsTime
 
-    def doStatsReset():
+    def doStatsReset(self):
         return
     
     def reply(self, arg_command):
@@ -295,34 +298,34 @@ class CryoconM32(serial_device):
                         result = my_loop.getLoopRamp()
                 elif my_param == "RATE" :
                     if query :
-                        result = my_sensor.getLoopRampRate()
+                        result = my_loop.getLoopRampRate()
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopRampRate(my_value)
                 elif my_param == "PGAIN" :
                     if query :
-                        result = my_sensor.getLoopPGain()
+                        result = my_loop.getLoopPGain()
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopPGain(my_value)
                 elif my_param == "IGAIN" :
                     if query :
-                        result = my_sensor.getLoopIGain()
+                        result = my_loop.getLoopIGain()
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopIGain(my_value)
                 elif my_param == "DGAIN" :
                     if query :
-                        result = my_sensor.getLoopDGain()
+                        result = my_loop.getLoopDGain()
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopDGain(my_value)
                 elif my_param == "PMANUAL" :
                     if query :
-                        result = my_sensor.getLoopManOut()
+                        result = my_loop.getLoopManOutput()
                     else :
                         my_value = float(w[2])
-                        result = my_loop.setLoopManOut(my_value)
+                        result = my_loop.setLoopManOutput(my_value)
                 else :
                     if self.diagnosticLevel() > 2:
                         print "CryoconM32_sim: no match to parameter " + my_param + " in word " + my_word + " in command " + my_command
@@ -336,10 +339,10 @@ class CryoconM32(serial_device):
                         print "CryoconM32_sim: Unexpected question mark in command " + my_command    
                 else :
                     result = self.doReseed()
-            elif my_param.startswith(FWREV):
+            elif my_param.startswith("FWREV"):
                 if query :
                     result = self.getFirmwareRev()
-            elif my_param.startswith(HWREV):
+            elif my_param.startswith("HWREV"):
                 if query :
                     result = self.getHardwareRev()
             elif my_param.startswith("NAME"):
@@ -354,7 +357,7 @@ class CryoconM32(serial_device):
             else :
                 if self.diagnosticLevel() > 2:
                     print "CryoconM32_sim: no match to parameter " + my_param + " in word " + my_word + " in command " + my_command
-        elif my_word.startswith("IDN"):
+        elif my_word.startswith("*IDN"):
             if query :
                 result = self.getModel()
         elif my_word.startswith("STA"):
@@ -394,8 +397,9 @@ class CryoconM32(serial_device):
 
 if __name__ == "__main__":
     # little test function that runs only when you run this file
+    # Not used by built IOC
     dev = CryoconM32()
-    dev.start_ip(9015)
-    dev.start_debug(9016)
+    dev.start_ip(9017)
+    dev.start_debug(9018)
     # do a raw_input() to stop the program exiting immediately
     raw_input()
