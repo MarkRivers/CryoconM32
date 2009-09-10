@@ -13,8 +13,9 @@ DBD += CryoconM32.dbd
 
 # CryoconM32.dbd will be created from these files
 CryoconM32_DBD += base.dbd
-#CryoconM32_DBD += asyn.dbd
-#CryoconM32_DBD += stream.dbd
+CryoconM32_DBD += asyn.dbd
+CryoconM32_DBD += stream.dbd
+CryoconM32_DBD += calc.dbd
 
 # CryoconM32_registerRecordDeviceDriver.cpp will be created
 # CryoconM32.dbd
