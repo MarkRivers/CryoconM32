@@ -102,7 +102,7 @@ class Loop(object):
         return
 
     def getLoopDGain(self):
-        return self.loopPGain
+        return self.loopDGain
 
     def setLoopDGain(self, arg_loopDGain):
         self.loopDGain = arg_loopDGain
@@ -173,6 +173,7 @@ class CryoconM32(serial_device):
         self.sinkT = "50"
         self.statsTime = "1"
         
+        print "CryoconM32_sim: Initialised."
         return
 
     def doReseed(self):
