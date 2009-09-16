@@ -21,8 +21,6 @@ class CryoconM32TestSuite(TestSuite):
             epicsDbFiles="db/example.expanded.db",
             simulationCmds=['python2.4 data/CryoconM32_sim.py'],
             simDevices=[SimDevice("SIM-TS-TCTRL-01", 9016)],
-            environment=[('EPICS_CA_REPEATER_PORT','6065'),
-                ('EPICS_CA_SERVER_PORT','6064')],
             guiCmds=['edm -m "P=SIM-EA-TCTRL-01,tctrlr=SIM-TS-TCTRL-01,device=SIM-TS-TCTRL-01,record1=T1,record2=T2" -eolc -x data/CryoconM32_detail.edl'])
         Target("hardware", self,
             iocDirectory="iocs/example",
