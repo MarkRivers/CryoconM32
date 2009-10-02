@@ -58,6 +58,7 @@ setSetpointT { out "LOOP \$1:SETPT %f" ; }
 
 # Loop type: mode loop is operating in.
 getLoopType { out "LOOP \$1:TYPE?" ; in "%s" ; } 
+setLoopType { out "LOOP \$1:TYPE %s" ; }
 
 # Loop source: which input channel is used to control the loop.
 getLoopSource { out "LOOP \$1:SOURCE?" ; in "%s" ; }

@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 157
-y 87
+x 413
+y 66
 w 588
 h 749
 font "arial-medium-r-18.0"
@@ -1631,5 +1631,45 @@ useDisplayBg
 value {
   "Manual output"
 }
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 144
+y 352
+w 88
+h 24
+fgColor index 25
+bgColor index 3
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tctrlr):DMD:LOOP1:LOOPTYPE"
+indicatorPv "$(tctrlr):DMD:LOOP1:LOOPTYPE"
+font "arial-medium-r-14.0"
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 384
+y 352
+w 88
+h 24
+fgColor index 25
+bgColor index 3
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(tctrlr):DMD:LOOP2:LOOPTYPE"
+indicatorPv "$(tctrlr):DMD:LOOP2:LOOPTYPE"
+font "arial-medium-r-14.0"
 endObjectProperties
 
