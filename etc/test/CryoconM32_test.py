@@ -17,15 +17,16 @@ class CryoconM32TestSuite(TestSuite):
         # Something to do with what happens to the IOC stdin.
         Target("simulation", self,
             iocDirectory="iocs/example_sim",
-            iocBootCmd="screen -D -m -L bin/linux-x86/stexample.sh",
-            epicsDbFiles="db/example.expanded.db",
-            simulationCmds=['python2.4 data/CryoconM32_sim.py'],
-            simDevices=[SimDevice("SIM-TS-TCTRL-01", 9016)],
+            iocBootCmd="bin/linux-x86/stexample.sh",
+            epicsDbFiles="db/example_expanded.db",
+            runIocInScreenUnderHudson=True,   
+#            simulationCmds=['python2.4 data/CryoconM32_sim.py'],
+            simDevices=[SimDevice("SIM-TS-TCTRL-01", 9017, rpc=True)],
             guiCmds=['edm -m "P=SIM-EA-TCTRL-01,tctrlr=SIM-TS-TCTRL-01,device=SIM-TS-TCTRL-01,record1=T1,record2=T2" -eolc -x data/CryoconM32_detail.edl'])
         Target("hardware", self,
             iocDirectory="iocs/example",
-            iocBootCmd="screen -D -m -L bin/linux-x86/stexample.sh",
-            epicsDbFiles="db/example.expanded.db",
+            iocBootCmd="bin/linux-x86/stexample.sh",
+            epicsDbFiles="db/example_expanded.db",
             guiCmds=['edm -m "P=SIM-TS-TCTRL-01,tctrlr=SIM-TS-TCTRL-01,device=SIM-TS-TCTRL-01,record1=T1,record2=T2" -eolc -x data/CryoconM32_detail.edl'])
 
         # The tests
