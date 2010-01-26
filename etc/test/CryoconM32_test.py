@@ -32,6 +32,7 @@ class CryoconM32TestSuite(TestSuite):
         # The tests
         CaseIdentify(self)
         CaseChangeSetpoints(self)
+        CaseChangeManualOutputs(self)
         CaseChangePIDs(self)
         return
 
@@ -67,11 +68,41 @@ class CaseIdentify( CryoconM32Case ):
         print "Model = " + self.getPv(self.pvPrefix + "SYS:MODEL")
         print "Hardware Revision = " + self.getPv(self.pvPrefix + "SYS:HWREV")
         print "Firmware Revision = " + self.getPv(self.pvPrefix + "SYS:FWREV")
+        print "Controller Name = " + self.getPv(self.pvPrefix + "SYS:CONTROLLERNAME")
+        return
+    
+class CaseSystemStats( CryoconM32Case ):
+    def runTest(self):
+        '''Perform tests on stats functions which belong to the system and not a loop.'''
+        print "Stats time = " + self.getPv(self.pvPrefix + "STS:STATS:TIME")
+        print "Sink temperature = " + self.getPv(self.pvPrefix + "STS:SINKTEMP")
+        print "Ambient temperature = " + self.getPv(self.pvPrefix + "STS:AMBIENTTEMP")
+        print "Testing averaging filter reseed now."
+        self.putPv(self.pvPrefix + "DMD:RESEED.PROC" , 1)
+        return
+
+class CaseResetSystemStats( CryoconM32Case ):
+    def runTest(self):
+        '''Rezero the accumulated stats, reset the zero of the time over which the stats have been collected.'''
+        # Construct names of PVs to be used.
+        my_demandPv = self.pvPrefix + "DMD:STATS:RESET.PROC"
+        my_statusPv = self.pvPrefix + "STS:STS:STATS:TIME"
+
+        # Grab existing status value.
+        my_before = self.getPv(my_statusPv)
+
+        # Write new demand value
+        self.putPv(my_demandPv , 1 )
+
+        # Verify the change has happened as we expect
+        my_after = self.verifyPvInRange(my_statusPv , 0 , 2 )
+        print "Stats time changed from " + str(my_before) + " to " + str(my_after)
+        
         return
     
 # -----------------------------------------------
 # Control loop tests.
-# Note control loop types in use restricted to PID and MAN but the real instrument
+# Note control loop types in use restricted to PID and Man and Off but the real instrument
 # supports other loop types.
 class CaseChangeSetpoints( CryoconM32Case ):
     def changeLoopSetpoint(self, arg_loopID, arg_value):

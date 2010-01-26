@@ -1,5 +1,5 @@
 #!/bin/env python2.4
-
+import time
 from pkg_resources import require
 require('dls_serial_sim')
 from dls_serial_sim import serial_device
@@ -51,12 +51,14 @@ class Sensor(object):
 # Another Helper class. So we can instantiate 2 objects to match the 2 instantiations of the
 # loop template.
 class Loop(object):
+    allowedLoopTypes = ['Off' , 'PID', 'Man' , 'Table' , 'RampP']
+    
     def __init__(self, arg_loopID, arg_sensor):
         self.loopID = arg_loopID
         self.sensor = arg_sensor
         self.setpointT = 0.0
         self.loopType = "PID"
-        self.loopRamp = "YES"
+        self.loopRamp = "NO"
         self.loopRampRate = 100.0
         self.loopPGain = 2.5
         self.loopIGain = 10.0
@@ -72,7 +74,6 @@ class Loop(object):
 
     def getSetpointT(self):
         return self.setpointT
-    
 
     def setSetpointT(self, arg_setpointT):
         self.setpointT = arg_setpointT
@@ -81,11 +82,34 @@ class Loop(object):
     def getLoopType(self):
         return self.loopType
 
+    def setLoopType(self, arg_loopType):
+        if arg_loopType in Loop.allowedLoopTypes :
+            # NOTE: This is a best guess what the behaviour is if you try to
+            # set one of these when the Ramp status is not appropriate.
+            if arg_loopType == "PID" and self.Ramp == "YES" :
+                self.loopType = "RampP"
+            elif arg_loopType == "RampP" and self.Ramp == "NO" :
+                self.loopType = "PID"
+            else :
+                # This is what should happen most of the time, the normal case for an allowed loop type.
+                self.loopType = arg_loopType
+        else :
+            # This not a valid loop type, but it does not normally generate an error, it is just ignored.
+            if self.diagnosticLevel() > 1:
+                print "CryocomM32_sim: Loop: setLoopType: argument" + arg_loopType + " not in allowed list of loop types " + Loop.allowedLoopTypes
+
+        return
+
     def getLoopRampRate(self):
         return self.loopRampRate
 
+    def setLoopRampRate(self, arg_loopRampRate):
+        self.loopRampRate = arg_loopRampRate
+        return
+
     def getLoopRamp(self):
         return self.loopRamp
+# If ever we write a setLoopRamp function, it will have to interact with the loop type too.
 
     def getLoopPGain(self):
         return self.loopPGain
@@ -132,7 +156,7 @@ class CryoconM32(serial_device):
                                 "getTempSlope" ,
                                 "getTempOffset" ,
                                 "getSetpointT" ,     "setSetpointT" ,
-                                "getLoopType" ,
+                                "getLoopType" ,      "setLoopType" ,
                                 "getLoopSource" ,
                                 "getLoopRamp" ,
                                 "getLoopRampRate" ,  "setLoopRampRate" ,
@@ -171,36 +195,59 @@ class CryoconM32(serial_device):
         self.controllerName = "Magnet-22"
         self.ambientT = "320"
         self.sinkT = "50"
-        self.statsTime = "1"
+#        self.statsTimeZero=Time()
+        self.calcStatsReset()
         
         print "CryoconM32_sim: Initialised."
         return
 
     def doReseed(self):
+        self.covered("reseed")
         return
     
     def getFirmwareRev(self):
+        self.covered("getFirmwareRev")
         return self.firmwareRev
     
     def getHardwareRev(self):
+        self.covered("getHardwareRev")
         return self.hardwareRev
 
     def getModel(self):
+        self.covered("getModel")
         return self.model
 
     def getControllerName(self):
+        self.covered("getControllerName")
         return self.controllerName
 
     def getAmbientT(self):
+        self.covered("getAmbientT")
         return self.ambientT
     
     def getSinkT(self):
+        self.covered("getSinkT")
         return self.sinkT
     
+    def calcStatsTime(self):
+        self.statsTime = str(int(time.time() - self.statsTimeZero))
+        return
+    
     def getStatsTime(self):
+        self.calcStatsTime()
+        self.covered("getStatsTime")
         return self.statsTime
 
+    def calcStatsReset(self):
+        # This is a floating point number.  Will need to be converted to report integer number of seconds.
+        # It may or may not report whole seconds or fractions of seconds, not guaranteed from manual definition.
+        self.statsTimeZero = time.time()
+        self.statsTime = "0"
+        return
+    
     def doStatsReset(self):
+        calcStatsReset(self)
+        self.covered("resetStats")
         return
     
     def reply(self, arg_command):
@@ -240,34 +287,42 @@ class CryoconM32(serial_device):
                 if my_param == "SENPR" :
                     if query :
                         result = my_sensor.getSensorRaw()
+                        self.covered("getSensorraw")
                         
                 elif my_param == "TEMP" :
                     if query :
                         result = my_sensor.getTemp()
+                        self.covered("getTemp")
             
                 elif my_param == "UNITS" :
                     if query :
                         result = my_sensor.getTempUnits()
+                        self.covered("getTempUnits")
 
                 elif my_param == "MINIMUM" :
                     if query :
-                        result = my_sensor.getTempMin()
+                       result = my_sensor.getTempMin()
+                       self.covered("getTempMin")
 
                 elif my_param == "MAXIMUM" :
                     if query :
                         result = my_sensor.getTempMax()
+                        self.covered("getTempMax")
 
                 elif my_param == "VARIANCE" :
                     if query :
-                        result = my_sensor.getTempVariance()
+                       result = my_sensor.getTempVariance()
+                       self.covered("getTempVariance")
         
                 elif my_param == "SLOPE" :
                     if query :
                         result = my_sensor.getTempSlope()
+                        self.covered("getTempSlope")
 
                 elif my_param == "OFFSET" :
                     if query :
                         result = my_sensor.getTempOffset()
+                        self.covered("getTempOffset")
                 else :
                     if self.diagnosticLevel() > 2:
                         print "CryoconM32_sim: no match to parameter " + my_param + " in word " + my_word + " in command " + my_command
@@ -285,48 +340,67 @@ class CryoconM32(serial_device):
                 if my_param == "SETPT" :
                     if query :
                         result = my_loop.getSetpointT()
+                        self.covered("getSetpointT")
                     else :
                         my_value = float(w[2])
                         result = my_loop.setSetpointT(my_value)
+                        self.covered("setSetpointT")
                 elif my_param == "TYPE" :
                     if query :
                         result = my_loop.getLoopType()
+                        self.covered("getLoopType")
+                    else :
+                        my_value = w[2]
+                        result = my_loop.setLoopType(my_value)
+                        self.covered("setLoopType")
                 elif my_param == "SOURCE" :
                     if query :
                         result = my_loop.getLoopSource()
+                        self.covered("getLoopSource")
                 elif my_param == "RAMP" :
                     if query :
                         result = my_loop.getLoopRamp()
+                        self.covered("getLoopRamp")
                 elif my_param == "RATE" :
                     if query :
                         result = my_loop.getLoopRampRate()
+                        self.covered("getLoopRampRate")
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopRampRate(my_value)
+                        self.covered("setLoopRampRate")
                 elif my_param == "PGAIN" :
                     if query :
                         result = my_loop.getLoopPGain()
+                        self.covered("getLoopPGain")
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopPGain(my_value)
+                        self.covered("setLoopPGain")
                 elif my_param == "IGAIN" :
                     if query :
                         result = my_loop.getLoopIGain()
+                        self.covered("getLoopIGain")
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopIGain(my_value)
+                        self.covered("setLoopIGain")
                 elif my_param == "DGAIN" :
                     if query :
                         result = my_loop.getLoopDGain()
+                        self.covered("getLoopDGain")
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopDGain(my_value)
+                        self.covered("setLoopDGain")
                 elif my_param == "PMANUAL" :
                     if query :
                         result = my_loop.getLoopManOutput()
+                        self.covered("getLoopManOutput")
                     else :
                         my_value = float(w[2])
                         result = my_loop.setLoopManOutput(my_value)
+                        self.covered("setLoopManOutput")
                 else :
                     if self.diagnosticLevel() > 2:
                         print "CryoconM32_sim: no match to parameter " + my_param + " in word " + my_word + " in command " + my_command
