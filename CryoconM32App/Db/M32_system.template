@@ -5,6 +5,7 @@
 #! DBDEND
 
 
+# # The readback of the time over which statistics have been collected.
 record(ai, "$(tctrlr):STS:STATS:TIME") {
   field(DESC, "Sample Time for stats.")
   field(DTYP, "stream")
@@ -12,6 +13,8 @@ record(ai, "$(tctrlr):STS:STATS:TIME") {
   field(EGU, "s")
 }
 
+# # Command to reset the statistics and start collecting them again.
+# # Not seen this work.
 record(ao, "$(tctrlr):DMD:STATS:RESET") {
   field(DESC, "Rezero statistics collected.")
   field(DTYP, "stream")
@@ -20,7 +23,7 @@ record(ao, "$(tctrlr):DMD:STATS:RESET") {
   field(EGU, "s")
 }
 
-
+# # Readback of the heater sink temperature.
 record(ai, "$(tctrlr):STS:SINKTEMP") {
   field(DESC, "Temp of the heat sink.")
   field(PINI, "YES")
@@ -29,6 +32,7 @@ record(ai, "$(tctrlr):STS:SINKTEMP") {
   field(EGU, "$(egu)")
 }
 
+# #  Readback of the ambient temperature inside the instrument.
 record(stringin, "$(tctrlr):STS:AMBIENTTEMP") {
   field(DESC, "Temp inside M32 unit.")
   field(SCAN, "5 second")
@@ -36,6 +40,7 @@ record(stringin, "$(tctrlr):STS:AMBIENTTEMP") {
   field(INP, "@CryoconM32.protocol getAmbientT $(port)")
 }
 
+# # Readback of model information
 record(stringin, "$(tctrlr):SYS:MODEL") {
   field(DESC, "Full model, fw & hw info.")
   field(DTYP, "stream")
@@ -43,7 +48,7 @@ record(stringin, "$(tctrlr):SYS:MODEL") {
   field(PINI, "YES")
 }
 
-
+# # Readback of the instrument name.
 record(stringin, "$(tctrlr):SYS:CONTROLLERNAME") {
   field(DESC, "Name of this controller.")
   field(DTYP, "stream")
@@ -51,6 +56,7 @@ record(stringin, "$(tctrlr):SYS:CONTROLLERNAME") {
   field(PINI, "YES")
 }
 
+# # Readback of the firmware revision level.
 record(stringin, "$(tctrlr):SYS:FWREV") {
   field(DESC, "Firmware Revision Level")
   field(DTYP, "stream")
@@ -58,6 +64,7 @@ record(stringin, "$(tctrlr):SYS:FWREV") {
   field(PINI, "YES")
 }
 
+# # Readback of the hardware revision level.
 record(stringin, "$(tctrlr):SYS:HWREV") {
   field(DESC, "Hardware Revision Level")
   field(DTYP, "stream")
@@ -65,8 +72,9 @@ record(stringin, "$(tctrlr):SYS:HWREV") {
   field(PINI, "YES")
 }
 
+# # Command to reseed the Averaging Filter
 record(stringout, "$(tctrlr):DMD:RESEED") {
-  field(DESC, "Reseed Ave Filter")
+  field(DESC, "Reseed Avg Filter")
   field(DTYP, "stream")
   field(OUT, "@CryoconM32.protocol reseed $(port)")
 }

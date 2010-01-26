@@ -4,8 +4,15 @@
 #! DBD("/dls_sw/prod/R3.14.8.2/support/streamDevice/2-3dls6/dbd/stream.dbd")
 #! DBDEND
 
+# This template supports a single sensor channel, of which the unit has up to 2.
+#
+# List of macros
+# --------------
+# device	The device name.
+# record	the record name, T1 or T2
+#
 # %gdatag,template,simplePv,$(gda_name).$(record),$(gda_desc)
-
+# # The readback value of the units the unit is reporting in.
 record(stringin, "$(device):STS:$(record):UNITS") {
   field(DESC, "Temp. units.")
   field(PINI, "YES")
@@ -15,6 +22,7 @@ record(stringin, "$(device):STS:$(record):UNITS") {
 
 # % archiver 10 Monitor
 # %gdatag,pv,ro,$(gda_name).$(record),RECORD,Sensor temperature
+# # The readback value of the temperature converted (by the unit).
 record(ai, "$(device):STS:$(record)") {
   field(DESC, "Sensor Temperature")
   field(DTYP, "stream")
@@ -34,6 +42,7 @@ record(ai, "$(device):STS:$(record)") {
   field(LSV, "MAJOR")
 }
 
+# # The readback value of the raw sensor reading. Usually in Ohms but depends on sensor type.
 record(ai, "$(tctrlr):STS:$(sensor):RAW") {
   field(DESC, "Raw Sensor Reading")
   field(DTYP, "stream")
@@ -45,6 +54,7 @@ record(ai, "$(tctrlr):STS:$(sensor):RAW") {
 }
 
 
+# # The readback value of the statistical minimum since power on or last stats reset.
 record(ai, "$(device):STS:$(record):MIN") {
   field(DESC, "Minimum Sensor Temp.")
   field(DTYP, "stream")
@@ -56,6 +66,7 @@ record(ai, "$(device):STS:$(record):MIN") {
   field(PREC, "3")
 }
 
+# # The readback value of the statistical maximum since power on or last stats reset.
 record(ai, "$(device):STS:$(record):MAX") {
   field(DESC, "Maximum Sensor Temp.")
   field(DTYP, "stream")
@@ -66,7 +77,7 @@ record(ai, "$(device):STS:$(record):MAX") {
   field(PREC, "3")
 }
 
-
+# # The readback value of the statistical variance since power on or last stats reset.
 record(ai, "$(device):STS:$(record):VARIANCE") {
   field(DESC, "Variance in Sensor Temp.")
   field(DTYP, "stream")
@@ -76,6 +87,7 @@ record(ai, "$(device):STS:$(record):VARIANCE") {
   field(PREC, "3")
 }
 
+# # The readback value of the temperature slope for the best fit for a straight line since power on or last stats reset.
 record(ai, "$(device):STS:$(record):SLOPE") {
   field(DESC, "Slope of stats line fit.")
   field(DTYP, "stream")
@@ -86,6 +98,7 @@ record(ai, "$(device):STS:$(record):SLOPE") {
   field(PREC, "3")
 }
 
+# # The readback value of the temperature offset for the best fit for a straight line since power on or last stats reset.
 record(ai, "$(device):STS:$(record):OFFSET") {
   field(DESC, "Offset of stats line fit.")
   field(DTYP, "stream")

@@ -5,12 +5,23 @@
 #! DBD("/dls_sw/prod/R3.14.8.2/support/calc/2-6-3dls1/dbd/calc.dbd")
 #! DBDEND
 
-
+# NOTE: This file uses comment markers and commands for doxygen.
+# This template implements support for a control loop within the Cryocon M32 instrument.
+#
+# List of macros.
+#
+# tctrlr	The device name of the unit.
+# loop		The loop number. The unit can control 2 loops.  They are numbered 1 or 2.
+# port		The RS232 port number the device is expected to communicate on.
+# scan		The scan rate of certain records that may affect performance.
+# rampratelimit	The limit to be imposed on the temperate ramp rate.
+#
 # %gdatag,template,simplePv,$(gda_name).SETPOINT-DMD,$(gda_desc) setpoint demand
 # %gdatag,template,simplePv,$(gda_name).SETPOINT-RBV,$(gda_desc) setpoint readback
 # %gdatag,template,simplePv,$(gda_name).MANUAL-DMD,$(gda_desc) manual control demand
 # %gdatag,template,simplePv,$(gda_name).MANUAL-RBV,$(gda_desc) manual control readback
 # %gdatag,pv,ro,$(gda_name).SETPOINT-RBV,RECORD,Setpoint readback
+# # The readback of the temperature setpoint for the given control loop.
 record(ai, "$(tctrlr):STS:LOOP$(loop):SETPOINT") {
   field(DESC, "Setpoint Temp, loop $(loop).")
   field(SCAN, "$(scan) second")
@@ -19,6 +30,14 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):SETPOINT") {
   field(PREC, "3")
 }
 
+# # \brief The readback of the loop type: the control mode loop is operating in.
+# #
+# # Allowed values 
+# # \param Off		Control disabled.
+# # \param PID		PID loop control mode with PGain, IGain, DGain, parameters as currently specified 
+# # \param Man		Manual mode, with power output PMANUAL parameter as currently specified.
+# # \param Table	PID Table mode using a lookup table
+# # \param RampP	Unit is in PID mode, but is currently ramping.
 record(stringin, "$(tctrlr):STS:LOOP$(loop):LOOPTYPE") {
   field(DESC, "manual PID, table, OFF...")
   field(PINI, "YES")
@@ -26,6 +45,9 @@ record(stringin, "$(tctrlr):STS:LOOP$(loop):LOOPTYPE") {
   field(INP, "@CryoconM32.protocol getLoopType($(loop)) $(port)")
 }
 
+# # \brief The readback of the loop source: which input channel is used to control the loop.
+# #
+# # The unit has 2 input channels. The unit uses fixed names CHA or CHB.
 record(stringin, "$(tctrlr):STS:LOOP$(loop):LOOPSOURCE") {
   field(DESC, "Sensor ch. loop controls.")
   field(PINI, "NO")
@@ -34,6 +56,7 @@ record(stringin, "$(tctrlr):STS:LOOP$(loop):LOOPSOURCE") {
   field(FLNK, "$(tctrlr):CLC:LOOP$(loop):SRCRECORD PP MS")
 }
 
+# # The readback of the loop ramp status: Is there a temperature ramp in progress?
 record(stringin, "$(tctrlr):STS:LOOP$(loop):LOOPRAMP") {
   field(DESC, "Temp ramp in progress?")
   field(SCAN, "$(scan) second")
@@ -42,6 +65,7 @@ record(stringin, "$(tctrlr):STS:LOOP$(loop):LOOPRAMP") {
   field(INP, "@CryoconM32.protocol getLoopRamp($(loop)) $(port)")
 }
 
+# # The readback of the loop ramp rate: ramp rate that is/will be used when performing a ramp.
 record(ai, "$(tctrlr):STS:LOOP$(loop):RAMPRATE") {
   field(DESC, "Rate Temp ramped at.")
   field(SCAN, "$(scan) second")
@@ -55,6 +79,7 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):RAMPRATE") {
 }
 
 # %gdatag,pv,rw,$(gda_name).SETPOINT-DMD,RECORD,Setpoint demand
+# # The demand value of the temperature setpoint for the control loop.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):SETPOINT") {
   field(DESC, "Demand setpoint Temp.")
   field(DTYP, "stream")
@@ -63,6 +88,7 @@ record(ao, "$(tctrlr):DMD:LOOP$(loop):SETPOINT") {
   field(PREC, "3")
 }
 
+# # The demand value of the proportional gain term to be used when loop is in PID mode.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):PGAIN") {
   field(DESC, "Demand Proportional gain")
   field(DTYP, "stream")
@@ -71,6 +97,7 @@ record(ao, "$(tctrlr):DMD:LOOP$(loop):PGAIN") {
   field(PREC, "3")
 }
 
+# # The readback value of the proportional gain term to be used when loop is in PID mode.
 record(ai, "$(tctrlr):STS:LOOP$(loop):PGAIN") {
   field(DESC, "PID Proportional gain.")
   field(SCAN, "$(scan) second")
@@ -79,6 +106,7 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):PGAIN") {
   field(PREC, "3")
 }
 
+# # The demand value of the integral gain term to be used when loop is in PID mode.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):IGAIN") {
   field(DESC, "Demand PID Integral gain.")
   field(DTYP, "stream")
@@ -87,6 +115,7 @@ record(ao, "$(tctrlr):DMD:LOOP$(loop):IGAIN") {
   field(PREC, "3")
 }
 
+# # The readback value of the integral gain term to be used when loop is in PID mode.
 record(ai, "$(tctrlr):STS:LOOP$(loop):IGAIN") {
   field(DESC, "PID Integral gain term.")
   field(SCAN, "$(scan) second")
@@ -95,6 +124,7 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):IGAIN") {
   field(PREC, "3")
 }
 
+# # The demand value of the derivative gain term to be used when loop is in PID mode.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):DGAIN") {
   field(DESC, "Demand PID Derivative gain.")
   field(DTYP, "stream")
@@ -103,6 +133,7 @@ record(ao, "$(tctrlr):DMD:LOOP$(loop):DGAIN") {
   field(PREC, "3")
 }
 
+# # The readback value of the derivative gain term to be used when loop is in PID mode.
 record(ai, "$(tctrlr):STS:LOOP$(loop):DGAIN") {
   field(DESC, "PID Derivative gain.")
   field(SCAN, "$(scan) second")
@@ -111,6 +142,7 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):DGAIN") {
   field(PREC, "3")
 }
 
+# # The demand value of the loop ramp rate: ramp rate used when performing a ramp.
 record(ao, "$(tctrlr):SET:LOOP$(loop):RAMPRATE") {
   field(DESC, "Set Temp rate of change.")
   field(DTYP, "stream")
@@ -119,6 +151,7 @@ record(ao, "$(tctrlr):SET:LOOP$(loop):RAMPRATE") {
   field(PREC, "3")
 }
 
+# # The readback value of the loop ramp rate: ramp rate used when performing a ramp.
 record(ai, "$(tctrlr):DMD:LOOP$(loop):RAMPRATE") {
   field(DESC, "Demand Temp rate of change.")
   field(DTYP, "Soft Channel")
@@ -126,6 +159,7 @@ record(ai, "$(tctrlr):DMD:LOOP$(loop):RAMPRATE") {
   field(PREC, "3")
 }
 
+# # Calculation to impose a limit to the demanded ramprate.
 record(calcout, "$(tctrlr):CLC:LOOP$(loop):RAMPRATE:LIMCK") {
   field(DESC, "Impose ramprate limit.")
   field(CALC, "A>B?B:A")
@@ -135,6 +169,7 @@ record(calcout, "$(tctrlr):CLC:LOOP$(loop):RAMPRATE:LIMCK") {
   field(PREC, "3")
 }
 
+# # The value of the ramprate limit to impose on the demanded ramp rate.
 record(ao, "$(tctrlr):LIM:LOOP$(loop):RAMPRATE") {
   field(DESC, "Temp ramprate limit.")
   field(PINI, "NO")
@@ -148,10 +183,12 @@ record(dfanout, "$(tctrlr):DFAN:LOOP$(loop):RAMPRATELIM") {
   field(OUTA, "$(tctrlr):STS:LOOP$(loop):RAMPRATE.HIHI PP MS")
 }
 
-# To map responses CHA and CHB to T1 and T2
-# respectively in PV names for the sensor
-# template: REMEMEBER this control loop could be
-# using either channel for its input.
+# # \brief To map responses CHA and CHB to T1 and T2 (loop1 and loop2) respectively 
+# # in PV names for the sensor template.
+# #
+# # REMEMEBER this control loop could be using either channel for its input.
+# # \param Example1, loop1 could use CHA and loop2 use CHB or vice versa.
+# # \param Example2, loop1 and loop2 could both use channel B.
 record(scalcout, "$(tctrlr):CLC:LOOP$(loop):SRCRECORD") {
   field(DESC, "Map channel to PV name atom.")
   field(CALC, "(AA='CHA')?'T1':'T2'")
@@ -159,7 +196,10 @@ record(scalcout, "$(tctrlr):CLC:LOOP$(loop):SRCRECORD") {
   field(OUT, "$(tctrlr):CLC:LOOP$(loop):SLOPELIMPVNAME.AA PP MS")
 }
 
-# The CALC string has a limit so this record pulls the PV name string parts from a couple of fixed value stringin records.
+# # \brief Part of workaround for CALC string length limit.
+# #
+# # The CALC string has a limit so this record pulls the PV name 
+# # string parts from a couple of fixed value stringin records.
 record(scalcout, "$(tctrlr):CLC:LOOP$(loop):SLOPELIMPVNAME") {
   field(CALC, "BB+AA+CC")
   field(OUT, "$(tctrlr):PV:LOOP$(loop):SLOPELIMPVNAME PP MS")
@@ -172,10 +212,13 @@ record(stringout, "$(tctrlr):PV:LOOP$(loop):SLOPELIMPVNAME") {
   field(FLNK, "$(tctrlr):LIM:LOOP$(loop):RAMPRATE PP MS")
 }
 
-# The calc field of the scalcout record has a string length limit of 36 characters and including the strings as fixed values made the formula 2 long.
-# Therefore has to store the strings in separate records.
-# There is a limit to the output value of 40 characters.  This is OK.
-# It is difficult to predict the output length because it involves macros.
+# # \brief Slope limit prefix. Part of workaround for CALC string length limit.
+# #
+# # The calc field of the scalcout record has a string length limit of 36 characters
+# # and including the strings as fixed values made the formula too long.
+# # Therefore have to store the strings in separate records.
+# # There is a limit to the output value of 40 characters.  This is OK.
+# # It is difficult to predict the output length because it involves macros.
 record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMPRFX") {
   field(PINI, "YES")
   field(DTYP, "Soft Channel")
@@ -183,6 +226,7 @@ record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMPRFX") {
   field(VAL, "$(tctrlr):STS:")
 }
 
+# # \brief Slope limit suffix. Part of workaround for CALC string length limit.
 record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMSFX") {
   field(PINI, "NO")
   field(DTYP, "Soft Channel")
@@ -191,6 +235,7 @@ record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMSFX") {
 }
 
 # %gdatag,pv,rw,$(gda_name).MANUAL-DMD,RECORD,Manual output demand
+# # The demand value of output power level to be used when the loop is in manual operation mode.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):MANUAL") {
   field(DESC, "Manual control output demand")
   field(DTYP, "stream")
@@ -201,6 +246,7 @@ record(ao, "$(tctrlr):DMD:LOOP$(loop):MANUAL") {
 }
 
 # %gdatag,pv,ro,$(gda_name).MANUAL-RBV,RECORD,Manual output readback
+# # The readback value of output power level to be used when the loop is in manual operation mode.
 record(ai, "$(tctrlr):STS:LOOP$(loop):MANUAL") {
   field(DESC, "Manual control output")
   field(SCAN, "$(scan) second")
@@ -210,7 +256,17 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):MANUAL") {
   field(EGU, "%")
 }
 
-
+# # \brief The demand value of the loop type: the mode the control loop is to operate in.
+# #
+# # Allowed values 
+# # \param Off		Control disabled.
+# # \param PID		PID loop control mode with PGain, IGain, DGain, parameters as currently specified 
+# # \param Man		Manual mode, with power output PMANUAL parameter as currently specified.
+# # \param Table	PID Table mode using a lookup table
+# # \param RampP	Unit is in PID mode, but is currently ramping.
+# # NOTE: The manual is not clear and we have never tested what happens if you try to set RampP mode.
+# # It may be this is not a useful mode to set and will just be reported when PID is set and the
+# # unit is told to ramp.
 record(mbbo, "$(tctrlr):DMD:LOOP$(loop):LOOPTYPE") {
   field(DESC, "Loop control type")
   field(SCAN, "Passive")
