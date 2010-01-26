@@ -16,6 +16,9 @@
 #
 # The terminator is stated in the M32 manual as Ox0a or \n a.k.a line feed.
 # NOTE: This is DIFFERENT to the M14 protocol, which uses "\r\n" as its terminator.
+#
+# NOTE: This file has comment markers and commands for doxygen.
+# Any blank line starting with hash space has probably needs to be present or doxygen will get confused.
 Terminator = "\n";
 readtimeout = 500;
 PollPeriod = 500;
@@ -24,103 +27,131 @@ ExtraInput = Ignore; #Raw and Temp can have extra spaces after number
 # COMMANDS FOR THE SENSOR TEMPLATE: temperature readings and stats.
 # The M32 unit has 2 input temperature sensor channels.
 
-# Raw sensor reading. Usually in Ohms but depends on sensor type.
+# # Get the raw sensor reading. Usually in Ohms but depends on sensor type.
 getSensorraw { out "INP \$1:SENPR?"; in "%f"; }
 
-# Converted temperature.
+# # Get the converted temperature.
 getTemp { out "INP \$1:TEMP?"; in "%f"; }
 
-# Get the units.
+# # Get the units.
 getTempUnits { out "INPUT \$1:UNITS?"; in "%s"; }
 
-# Get the statistical minimum.
+# # Get the statistical minimum since power on or last stats reset.
 getTempMin { out "INPUT \$1:MINIMUM?"; in "%f"; }
 
-# Get the statistical maximum temperature.
+# # Get the statistical maximum temperature since power on or last stats reset.
 getTempMax { out "INPUT \$1:MAXIMUM?"; in "%f"; }
 
-# Get the statistical variance in the temperature.
-getTempVariance { out "INPUT \$1:VARIANCE?"; in "%f"; }
+# # Get the statistical variance in the temperature since power on or last stats reset.
+getTempVariance { out "INPUT \$1:VARIANCE?"; in "%f"; } 
 
-# Get the temperature slope.
+# # Get the temperature slope for the best fit for a straight line since power on or last stats reset.
 getTempSlope { out "INPUT \$1:SLOPE?"; in "%f"; }
 
-# Get the temperature offset for the best fit for a straight line.
+# # Get the temperature offset for the best fit for a straight line since power on or last stats reset.
 getTempOffset { out "INPUT \$1:OFFSET?"; in "%f"; }
 
 # COMMANDS FOR THE CONTROLLER TEMPLATE: setting and querying control loops.
 # Note that which sensor is input to which control loop is configurable
 # in the unit.
 # The M32 unit has 2 control loops.
+
+# # Get the temperature setpoint for the given control loop.
 getSetpointT { out "LOOP \$1:SETPT?" ; in "%f"; }
 
+# # Set the temperature setpoint for the given control loop.
 setSetpointT { out "LOOP \$1:SETPT %f" ; }
 
-# Loop type: mode loop is operating in.
-getLoopType { out "LOOP \$1:TYPE?" ; in "%s" ; } 
+# # \brief Get the loop type: mode loop is operating in.
+# #
+# # Allowed values 
+# # \param Off		Control disabled.
+# # \param PID		PID loop control mode with PGain, IGain, DGain, parameters as currently specified 
+# # \param Man		Manual mode, with power output PMANUAL parameter as currently specified.
+# # \param Table	PID Table mode using a lookup table
+# # \param RampP	Unit is in PID mode, but is currently ramping.
+getLoopType { out "LOOP \$1:TYPE?" ; in "%s" ; }
+
+# # Set the loop type: mode given loop is to operate in.
+# # NOTE: The manual is not clear and we have never tested what happens if you try to set RampP mode.
+# # It may be this is not a useful mode to set and will just be reported when PID is set and the
+# # unit is told to ramp.
 setLoopType { out "LOOP \$1:TYPE %s" ; }
 
-# Loop source: which input channel is used to control the loop.
+# # Get the loop source: which input channel is used to control the loop.
+# # Channels have fixed names A or B.
 getLoopSource { out "LOOP \$1:SOURCE?" ; in "%s" ; }
 
-# Loop ramp: Is there a temperature ramp in progress.
+# # Get loop ramp status: Is there a temperature ramp in progress?
 getLoopRamp { out "LOOP \$1:RAMP?" ; in "%s" ; }
 
-# Loop ramp rate: ramp rate used when performing a ramp.
+# # Get the loop ramp rate: ramp rate used when performing a ramp.
 getLoopRampRate { out "LOOP \$1:RATE?" ; in "%f" ; } 
+
+# # Set the loop ramp rate: ramp rate used when performing a ramp.
 setLoopRampRate { out "LOOP \$1:RATE %f" ; }
 
 # Parameters for the PID loop.
+# # Get the proportional gain term to be used when loop is in PID mode.
 getLoopPGain { out "LOOP \$1:PGAIN?" ; in "%f" ; }
+# # Get the integral gain term to be used when loop is in PID mode.
 getLoopIGain { out "LOOP \$1:IGAIN?" ; in "%f" ; }
+# # Get the derivative gain term to be used when loop is in PID mode.
 getLoopDGain { out "LOOP \$1:DGAIN?" ; in "%f" ; }
 
+# # Set the proportional gain term to be used when loop is in PID mode.
 setLoopPGain { out "LOOP \$1:PGAIN %f" ; }
+# # Set the integral gain term to be used when loop is in PID mode.
 setLoopIGain { out "LOOP \$1:IGAIN %f" ; }
+# # Set the derivative gain term to be used when loop is in PID mode.
 setLoopDGain { out "LOOP \$1:DGAIN %f" ; }
 
 # Manual loop control output
+# # Get the output power level to be used when loop is in manual operation mode.
 getLoopManOutput { out "LOOP \$1:PMANUAL?" ; in "%f" ; }
+
+# # Set the output power level to be used when loop is in manual operation mode.
 setLoopManOutput { out "LOOP \$1:PMANUAL %f" ; }
 
 #getHeaterCur {}
 
 # COMMANDS FOR THE SYSTEM TEMPLATE: System information
 
-# Reseed the Averaging Filter
+# # Reseed the Averaging Filter
 reseed { out "SYSTEM:RESEED" ; }
 
-# Get the firmware revision level.
+# # Get the firmware revision level.
 getFirmwareRev { out "SYSTEM:FWREV?" ; in "%s" ; }
 
-# Get the hardware revision level.
+# # Get the hardware revision level.
 getHardwareRev { out "SYSTEM:HWREV?" ; in "%s" ; }
 
-# Get full model information
+# # Get full model information
 getModel { out "*IDN?" ; in "%s" ; }
 
-# Get the instrument name.
+# # Get the instrument name.
 getControllerName { out "SYSTEM:NAME?" ; in "%s" ; }
 
-# Get the ambient temperature inside the instrument.
+# # Get the ambient temperature inside the instrument.
 getAmbientT { out "SYSTEM:AMBIENT?" ; in "%s" ; }
 
-# Get the heater sink temperature.
+# # Get the heater sink temperature.
 getSinkT { out "SYSTEM:HTRST?" ; in "\r%fC" ; }
 
-# The time over which statistics have been collected.
+# # Get the time over which statistics have been collected.
 getStatsTime { out "STATS:TIME?" ; in "%f"; }
 
-# Reset
+# # Reset the statistics and start collecting them again.
+# # Not seen this work.
 resetStats { out "STATS:RESET" ; }
 
-# Display Filter Time Constant.
+# # Get the display Filter Time Constant.
 getFilterTC { out "SYSTEM:DISTC" ; in "%f" ; }
 
-# Display resolution: FULL, 1, 2 or 3
+# # Get the display resolution: FULL, 1, 2 or 3
 getDisplayRes {out "SYSTEM:DRES" ; in "%s" ; }
 
-# Whether system will power up in control mode.
+# # Get the parameter to control whether unit will power up in control mode.
 getPUControl {out "SYSTEM:PUCONTROL" ; in "%s" ; }
 
 
