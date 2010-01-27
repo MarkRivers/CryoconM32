@@ -31,6 +31,7 @@ class CryoconM32TestSuite(TestSuite):
 
         # The tests
         CaseIdentify(self)
+        CaseGetTemperatures(self)
         CaseChangeSetpoints(self)
         CaseChangeManualOutputs(self)
         CaseChangePIDs(self)
@@ -60,10 +61,13 @@ class CryoconM32Case(TestCase):
 #
 # The EPICS implementation uses 3 templates.
 # The tests are split up according to which template they are exercising.
+# System tests        M32_system.template
+# Control loop tests  M32_control.template
+# Sensor tests        M32_sensor.template
 #
-
 # -----------------------------------------------
 # System tests
+# Tests for stuff on the M32_system template.
 class CaseIdentify( CryoconM32Case ):
     def runTest(self):
         '''Get the unit to identify itself.'''
@@ -97,7 +101,8 @@ class CaseResetSystemStats( CryoconM32Case ):
         # because it will revert to zero when processing is finished.
         self.putPv(my_demandPv , 1 )
 
-        my_sleeptime = 2
+        # Have to wait long enough to be sure the EPICS status record has polled the instrument (SCAN field).
+        my_sleeptime = 5
         self.sleep(my_sleeptime)
 
         # Verify the change has happened as we expect
@@ -105,11 +110,14 @@ class CaseResetSystemStats( CryoconM32Case ):
         print "Stats time changed from " + str(my_before) + " to " + str(my_after)
         
         return
-    
+
+# End of system tests    
 # -----------------------------------------------
 # Control loop tests.
+# Stuff for the M32_control template.
 # Note control loop types in use restricted to PID and Man and Off but the real instrument
 # supports other loop types.
+# The change cases are effectively testing the readback also.
 class CaseChangeSetpoints( CryoconM32Case ):
     def changeLoopSetpoint(self, arg_loopID, arg_value):
         '''Change setpoint temperature (or other controlled output) on given control loop.'''
@@ -240,11 +248,37 @@ class CaseChangePIDs ( CryoconM32Case ) :
         self.changeLoopPID( "1" , 2.57 , 1.8 , 0.02 )
         self.changeLoopPID( "2" , 3 , 2.2 , 0.0001 )
         return
-    
+
+# End of control loop tests.
 # -----------------------------------------------
 # Sensor channel tests.
 #
+# Testing stuff on M32_sensor template
 
+class CaseGetTemperatures( CryoconM32Case ):
+    def getSensorTemperature(self, arg_sensorRecordName):
+        '''Read back the temperature and units on a given sensor record name, which has to be T1 or T2.'''
+        print "getSensorTemperature: sensorRecordName = " + arg_sensorRecordName
+
+        # Construct names of PVs to be used.
+        my_valuePv = self.pvPrefix + "STS:" + arg_sensorRecordName
+        my_unitsPv = my_valuePv + ":UNITS"
+
+        # Grab existing values.
+        my_value = self.getPv(my_valuePv)
+        my_units = self.getPv(my_unitsPv)
+
+        print "getSensorTemperature: " + arg_sensorRecordName + " = " + str(my_value) + str(my_units)
+        return
+    
+    def runTest(self):
+        '''Readback the temperatures and units for both sensor channels.'''
+        self.getSensorTemperature ( "T1" )
+        self.getSensorTemperature ( "T2" )
+
+        return
+
+# End of sensor channel tests.
 ################################################
 # Main entry point
 
