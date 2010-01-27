@@ -34,6 +34,8 @@ class CryoconM32TestSuite(TestSuite):
         CaseChangeSetpoints(self)
         CaseChangeManualOutputs(self)
         CaseChangePIDs(self)
+        CaseSystemStats(self)
+        CaseResetSystemStats(self)
         return
 
 ################################################
@@ -74,8 +76,8 @@ class CaseIdentify( CryoconM32Case ):
 class CaseSystemStats( CryoconM32Case ):
     def runTest(self):
         '''Perform tests on stats functions which belong to the system and not a loop.'''
-        print "Stats time = " + self.getPv(self.pvPrefix + "STS:STATS:TIME")
-        print "Sink temperature = " + self.getPv(self.pvPrefix + "STS:SINKTEMP")
+        print "Stats time = " + str(self.getPv(self.pvPrefix + "STS:STATS:TIME"))
+        print "Sink temperature = " + str(self.getPv(self.pvPrefix + "STS:SINKTEMP"))
         print "Ambient temperature = " + self.getPv(self.pvPrefix + "STS:AMBIENTTEMP")
         print "Testing averaging filter reseed now."
         self.putPv(self.pvPrefix + "DMD:RESEED.PROC" , 1)
@@ -86,16 +88,20 @@ class CaseResetSystemStats( CryoconM32Case ):
         '''Rezero the accumulated stats, reset the zero of the time over which the stats have been collected.'''
         # Construct names of PVs to be used.
         my_demandPv = self.pvPrefix + "DMD:STATS:RESET.PROC"
-        my_statusPv = self.pvPrefix + "STS:STS:STATS:TIME"
+        my_statusPv = self.pvPrefix + "STS:STATS:TIME"
 
         # Grab existing status value.
         my_before = self.getPv(my_statusPv)
 
-        # Write new demand value
+        # Write new demand value.  Since it is a proc field, it does not make much sense to verify it
+        # because it will revert to zero when processing is finished.
         self.putPv(my_demandPv , 1 )
 
+        my_sleeptime = 2
+        self.sleep(my_sleeptime)
+
         # Verify the change has happened as we expect
-        my_after = self.verifyPvInRange(my_statusPv , 0 , 2 )
+        my_after = self.verifyPvInRange(my_statusPv , 0 , my_sleeptime + 1 )
         print "Stats time changed from " + str(my_before) + " to " + str(my_after)
         
         return
