@@ -193,9 +193,8 @@ class CryoconM32(serial_device):
         self.hardwareRev = "Simulation ABC"
         self.model = "CryoconM32"
         self.controllerName = "Magnet-22"
-        self.ambientT = "320"
-        self.sinkT = "50"
-#        self.statsTimeZero=Time()
+        self.ambientT = "+32C"
+        self.sinkT = "+50C"
         self.calcStatsReset()
         
         print "CryoconM32_sim: Initialised."
@@ -239,14 +238,22 @@ class CryoconM32(serial_device):
         return self.statsTime
 
     def calcStatsReset(self):
+        # This method is used both as part of object initialisation and to perform the reset on request.
+        if self.diagnosticLevel() > 4:
+            print "calcStatsReset: BEFORE: statsTimeZero = " + str(self.statsTimeZero) + ", statsTime = " + str(statsTime)
+
         # This is a floating point number.  Will need to be converted to report integer number of seconds.
         # It may or may not report whole seconds or fractions of seconds, not guaranteed from manual definition.
         self.statsTimeZero = time.time()
         self.statsTime = "0"
+        if self.diagnosticLevel() > 4:
+            print "calcStatsReset: AFTER: statsTimeZero = " + str(self.statsTimeZero) + ", statsTime = " + str(statsTime)
+
         return
     
     def doStatsReset(self):
-        calcStatsReset(self)
+        # This method is to handle a user instruction to reset.
+        self.calcStatsReset()
         self.covered("resetStats")
         return
     
