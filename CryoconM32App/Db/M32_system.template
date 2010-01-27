@@ -9,6 +9,8 @@
 record(ai, "$(tctrlr):STS:STATS:TIME") {
   field(DESC, "Sample Time for stats.")
   field(DTYP, "stream")
+  field(SCAN, "5 second")
+  field(PINI, "YES")
   field(INP, "@CryoconM32.protocol getStatsTime $(port)")
   field(EGU, "s")
 }
@@ -26,6 +28,7 @@ record(ao, "$(tctrlr):DMD:STATS:RESET") {
 # # Readback of the heater sink temperature.
 record(ai, "$(tctrlr):STS:SINKTEMP") {
   field(DESC, "Temp of the heat sink.")
+  field(SCAN, "5 second")
   field(PINI, "YES")
   field(INP, "@CryoconM32.protocol getSinkT $(port)")
   field(PREC, "3")
