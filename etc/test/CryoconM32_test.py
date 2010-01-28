@@ -30,11 +30,12 @@ class CryoconM32TestSuite(TestSuite):
             guiCmds=['edm -m "P=SIM-TS-TCTRL-01,tctrlr=SIM-TS-TCTRL-01,device=SIM-TS-TCTRL-01,record1=T1,record2=T2" -eolc -x data/CryoconM32_detail.edl'])
 
         # The tests
-        CaseIdentify(self)
-        CaseGetTemperatures(self)
-        CaseChangeSetpoints(self)
-        CaseChangeManualOutputs(self)
-        CaseChangePIDs(self)
+        CaseIdentifySystem(self)
+        CaseGetSensorTemperatures(self)
+        CaseGetSensorRawReadings(self)
+        CaseChangeLoopSetpoints(self)
+        CaseChangeLoopManualOutputs(self)
+        CaseChangeLoopPIDs(self)
         CaseSystemStats(self)
         CaseResetSystemStats(self)
         return
@@ -68,7 +69,7 @@ class CryoconM32Case(TestCase):
 # -----------------------------------------------
 # System tests
 # Tests for stuff on the M32_system template.
-class CaseIdentify( CryoconM32Case ):
+class CaseIdentifySystem( CryoconM32Case ):
     def runTest(self):
         '''Get the unit to identify itself.'''
         print "Model = " + self.getPv(self.pvPrefix + "SYS:MODEL")
@@ -107,7 +108,7 @@ class CaseResetSystemStats( CryoconM32Case ):
 
         # Verify the change has happened as we expect
         my_after = self.verifyPvInRange(my_statusPv , 0 , my_sleeptime + 1 )
-        print "Stats time changed from " + str(my_before) + " to " + str(my_after)
+        print "Stats time " + my_statusPv + " changed from " + str(my_before) + " to " + str(my_after)
         
         return
 
@@ -118,10 +119,10 @@ class CaseResetSystemStats( CryoconM32Case ):
 # Note control loop types in use restricted to PID and Man and Off but the real instrument
 # supports other loop types.
 # The change cases are effectively testing the readback also.
-class CaseChangeSetpoints( CryoconM32Case ):
+class CaseChangeLoopSetpoints( CryoconM32Case ):
     def changeLoopSetpoint(self, arg_loopID, arg_value):
         '''Change setpoint temperature (or other controlled output) on given control loop.'''
-        print "changeLoopSetpoint: loopID = " + arg_loopID + " arg_value = " + str(arg_value)
+        # print "changeLoopSetpoint: loopID = " + arg_loopID + " arg_value = " + str(arg_value)
 
         # Need a delta for accepting numeric comparison of PV float values.
         my_delta = 0.0001
@@ -140,7 +141,7 @@ class CaseChangeSetpoints( CryoconM32Case ):
         # Wait for status to be updated and then verify the new status.
         self.sleep(2)
         my_after = self.verifyPvFloat(my_statusPv , arg_value , my_delta )
-        print "changeLoopSetpoint: Setpoint changed from " + str(my_before) + " to " + str(my_after)
+        print "Loop " + arg_loopID + " setpoint " + my_statusPv + " changed from " + str(my_before) + " to " + str(my_after)
         return
     
     def runTest(self):
@@ -149,7 +150,7 @@ class CaseChangeSetpoints( CryoconM32Case ):
         self.changeLoopSetpoint ( "2" , 9.0 )
         return
 
-class CaseChangeManualOutputs( CryoconM32Case ):
+class CaseChangeLoopManualOutputs( CryoconM32Case ):
     def changeLoopManualOutput(self, arg_loopID, arg_value):
         '''
         Change manual output request on given control loop.  Expect this test to work for all loop types.
@@ -157,7 +158,7 @@ class CaseChangeManualOutputs( CryoconM32Case ):
         If the looptype is not MAN, the device is simply storing the parameter in case it is subsequently told to change the looptype to MAN.
         (Currently the EPICS database does not support setting the looptype as it is not wished to expose this functionality to the users).
         '''
-        print "changeLoopManualOutput: loopID = " + arg_loopID + " arg_value = " + str(arg_value)
+        # print "changeLoopManualOutput: loopID = " + arg_loopID + " arg_value = " + str(arg_value)
 
         # Need a delta for accepting numeric comparison of PV float values.
         my_delta = 0.0001
@@ -169,7 +170,7 @@ class CaseChangeManualOutputs( CryoconM32Case ):
 
         # Grab and report the looptype, which may well be important to understand what happens.
         my_looptype = self.getPv(my_looptypePv)
-        print "changeLoopManualOutput: Loop type = " + my_looptype
+        # print "changeLoopManualOutput: Loop type = " + my_looptype
         
         # Grab existing status value.
         my_before = self.getPv(my_statusPv)
@@ -182,7 +183,7 @@ class CaseChangeManualOutputs( CryoconM32Case ):
         self.sleep(2)
         my_after = self.verifyPvFloat(my_statusPv , arg_value , my_delta )
 
-        print "changeLoopManualOutput: Manual output changed from " + str(my_before) + " to " + str(my_after)
+        print "Loop " + arg_loopID + " manual output " + my_statusPv + " changed from " + str(my_before) + " to " + str(my_after)
         
         return
 
@@ -193,7 +194,7 @@ class CaseChangeManualOutputs( CryoconM32Case ):
         
         return
 
-class CaseChangePIDs ( CryoconM32Case ) :
+class CaseChangeLoopPIDs ( CryoconM32Case ) :
     def changeLoopPID ( self , arg_loopID, arg_value_P , arg_value_I , arg_value_D ) :
         '''
         Change control loop PID parameters for given control loop.  Expect this test to work for all looptypes.
@@ -202,7 +203,7 @@ class CaseChangePIDs ( CryoconM32Case ) :
         (Currently the EPICS database does not support setting the looptype as it is not wished to expose this functionality to the users).
         '''
 
-        print "changeLoopPID: loopID = " + arg_loopID + " arg_value_P = " + str(arg_value_P) + " arg_value_I = " + str(arg_value_I) + " arg_value_D = " + str(arg_value_D) 
+        #print "changeLoopPID: loopID = " + arg_loopID + " arg_value_P = " + str(arg_value_P) + " arg_value_I = " + str(arg_value_I) + " arg_value_D = " + str(arg_value_D) 
 
         # Pug the 3 argument values in a lookup we can loop over.
         my_PIDs = { "P" : arg_value_P , "I" : arg_value_I , "D" : arg_value_D }
@@ -215,21 +216,21 @@ class CaseChangePIDs ( CryoconM32Case ) :
 
         # Grab and report the looptype, which may well be important to understand what happens.
         my_looptype = self.getPv(my_looptypePv)
-        print "changeLoopPID: Loop type = " + my_looptype
+        # print "changeLoopPID: Loop type = " + my_looptype
         
         for my_key in my_PIDs.keys() :
-            print "changeLoopPID: " + my_key + " gain"
+            # print "changeLoopPID: " + my_key + " gain"
             
             # Construct names of PVs to be used.
             my_demandPv = self.pvPrefix + "DMD:LOOP" + arg_loopID + ":" + my_key + "GAIN"
             my_statusPv = self.pvPrefix + "STS:LOOP" + arg_loopID + ":" + my_key + "GAIN"
 
-            print "changeLoopPID: Demand PV = " + my_demandPv + " Status PV = " + my_statusPv 
+            # print "changeLoopPID: Demand PV = " + my_demandPv + " Status PV = " + my_statusPv 
 
             # Grab existing status value.
             my_before = self.getPv(my_statusPv)
 
-            print "changeLoopPID: Existing value = " + str(my_before)
+            # print "changeLoopPID: Existing value = " + str(my_before)
 
             # Write new demand value and verify it was OK.
             self.putPv(my_demandPv , my_PIDs[my_key] )
@@ -239,7 +240,7 @@ class CaseChangePIDs ( CryoconM32Case ) :
             self.sleep(3)
             my_after = self.verifyPvFloat(my_statusPv , my_PIDs[my_key] , my_delta )
 
-            print "changeLoopPID: " + my_key + " gain changed from " + str(my_before) + " to " + str(my_after)
+            print "Loop " + arg_loopID + " " + my_key + " gain " + my_statusPv + " changed from " + str(my_before) + " to " + str(my_after)
 
         return
 
@@ -255,26 +256,47 @@ class CaseChangePIDs ( CryoconM32Case ) :
 #
 # Testing stuff on M32_sensor template
 
-class CaseGetTemperatures( CryoconM32Case ):
-    def getSensorTemperature(self, arg_sensorRecordName):
-        '''Read back the temperature and units on a given sensor record name, which has to be T1 or T2.'''
-        print "getSensorTemperature: sensorRecordName = " + arg_sensorRecordName
+class CaseGetSensorTemperatures( CryoconM32Case ):
+    def getSensorTemperature(self, arg_sensorTemperatureRecordName):
+        '''Read back the temperature and units on a given sensor temperature record name, which has to be T1 or T2.'''
+        #print "getSensorTemperature: sensorTemperatureRecordName = " + arg_sensorTemperatureRecordName
 
         # Construct names of PVs to be used.
-        my_valuePv = self.pvPrefix + "STS:" + arg_sensorRecordName
+        my_valuePv = self.pvPrefix + "STS:" + arg_sensorTemperatureRecordName
         my_unitsPv = my_valuePv + ":UNITS"
 
         # Grab existing values.
         my_value = self.getPv(my_valuePv)
         my_units = self.getPv(my_unitsPv)
 
-        print "getSensorTemperature: " + arg_sensorRecordName + " = " + str(my_value) + str(my_units)
+        print "Sensor temperature " + my_valuePv + ", a.k.a. " + arg_sensorTemperatureRecordName + " = " + str(my_value) + " " + str(my_units)
         return
     
     def runTest(self):
         '''Readback the temperatures and units for both sensor channels.'''
         self.getSensorTemperature ( "T1" )
         self.getSensorTemperature ( "T2" )
+
+        return
+
+class CaseGetSensorRawReadings( CryoconM32Case ):
+    def getSensorRawReading(self, arg_sensorChannelName):
+        '''Read back the raw sensor reading on a given sensor channel, which has to be A or B.'''
+        # print "getSensorRawReading: sensorChannelName = " + arg_sensorChannelName
+
+        # Construct names of PV to be used.
+        my_valuePv = self.pvPrefix + "STS:" + arg_sensorChannelName + ":RAW"
+
+        # Grab existing value.
+        my_value = self.getPv(my_valuePv)
+
+        print "Sensor raw reading " + my_valuePv + " for sensor channel " + arg_sensorChannelName + " = " + str(my_value)
+        return
+    
+    def runTest(self):
+        '''Readback the raw sensor readings for both sensor channels.'''
+        self.getSensorRawReading ( "A" )
+        self.getSensorRawReading ( "B" )
 
         return
 
