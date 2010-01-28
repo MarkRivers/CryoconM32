@@ -33,6 +33,7 @@ class CryoconM32TestSuite(TestSuite):
         CaseIdentifySystem(self)
         CaseGetSensorTemperatures(self)
         CaseGetSensorRawReadings(self)
+        CaseGetSensorTemperatureStatistics(self)
         CaseChangeLoopSetpoints(self)
         CaseChangeLoopManualOutputs(self)
         CaseChangeLoopPIDs(self)
@@ -276,6 +277,38 @@ class CaseGetSensorTemperatures( CryoconM32Case ):
         '''Readback the temperatures and units for both sensor channels.'''
         self.getSensorTemperature ( "T1" )
         self.getSensorTemperature ( "T2" )
+
+        return
+
+class CaseGetSensorTemperatureStatistics( CryoconM32Case ):
+    def getSensorTemperatureStats(self, arg_sensorTemperatureRecordName):
+        '''Read back the accumulated statistics for a given sensor temperature record name, which has to be T1 or T2.'''
+        #print "getSensorTemperature: sensorTemperatureRecordName = " + arg_sensorTemperatureRecordName
+
+        # Construct stem of names of PVs to be used.
+        my_temperaturePv = self.pvPrefix + "STS:" + arg_sensorTemperatureRecordName
+
+        # Create a hash of statistics and record name components.
+        my_stats = { "variance" : "VARIANCE" , "slope" : "SLOPE" , "offset" : "OFFSET" , "maximum" : "MAX" , "minimum" : "MIN" }
+
+        for my_key in my_stats.keys() :
+            # print "getSensorTemperatureStats: " + my_key 
+            
+            # Construct names of PVs to be used.
+            my_valuePv = my_temperaturePv + ":" + my_stats[my_key]
+
+            # print "getSensorTemperatureStats: " + my_key + " statistic status PV = " + my_valuePv 
+
+            # Grab existing status value.
+            my_value = self.getPv(my_valuePv)
+            print "Sensor temperature " + arg_sensorTemperatureRecordName + " " + my_key + " statistic"  ", " + my_valuePv + " = " + str(my_value)
+
+        return
+    
+    def runTest(self):
+        '''Read back the accumulated temperature statistics for both sensor channels.'''
+        self.getSensorTemperatureStats ( "T1" )
+        self.getSensorTemperatureStats ( "T2" )
 
         return
 
