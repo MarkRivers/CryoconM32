@@ -83,6 +83,7 @@ record(ai, "$(device):STS:$(record):VARIANCE") {
   field(DTYP, "stream")
   field(INP, "@CryoconM32.protocol getTempVariance($(sensor)) $(port)")
   field(EGU, "$(egu)")
+  field(SCAN, "5 second")
   field(PINI, "YES")
   field(PREC, "3")
 }
