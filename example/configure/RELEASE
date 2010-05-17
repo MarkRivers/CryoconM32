@@ -18,20 +18,23 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 #SNCSEQ=/home/diamond/R3.14.7/prod/support/seq/2-0-10
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-EPICS_BASE=/dls_sw/epics/R3.14.8.2/base
+EPICS_BASE=/dls_sw/epics/R3.14.11/base
 
 # External module definitions (prod release).
-SUPPORT=/dls_sw/prod/R3.14.8.2/support
-WORK=/dls_sw/work/R3.14.8.2/support
-#LOCAL=/home/karb45/epics3.14.8.2
+SUPPORT=/dls_sw/prod/R3.14.11/support
+#WORKSUPPORT=/dls_sw/work/R3.14.11/support
+#MYHOME=~
+#MYWORKSUPPORT=$(MYHOME)/work/R3.14.11/support
 
 # Testing
-ASYN=$(SUPPORT)/asyn/4-9
-UTILITY=$(SUPPORT)/utility/dls2-8
-STREAM=$(SUPPORT)/streamDevice/2-4dls2
-IPAC=$(SUPPORT)/ipac/2-8dls4-5
-HY8515=$(SUPPORT)/Hy8515/3-9
-CRYOCONM32=$(WORK)/CryoconM32
+ASYN=$(SUPPORT)/asyn/4-13
+UTILITY=$(SUPPORT)/utility/dls2-11
+STREAM=$(SUPPORT)/streamDevice/2-4dls4
+IPAC=$(SUPPORT)/ipac/2-8dls4-6
+HY8515=$(SUPPORT)/Hy8515/3-9-r11597
+#CRYOCONM32=$(WORKSUPPORT)/CryoconM32
+#CRYOCONM32=$(MYWORKSUPPORT)/CryoconM32
+CRYOCONM32=$(TOP)/..
 
 #Capfast users may need the following definitions
 #CAPFAST_TEMPLATES=

@@ -8,7 +8,7 @@ include $(TOP)/configure/CONFIG
 
 -include $(STREAM)/StreamDevice/src/CONFIG_STREAM
 
-PROD_IOC = example
+PROD_IOC_vxWorks = example
 
 # example.dbd will be installed into <top>/dbd
 DBD += example.dbd

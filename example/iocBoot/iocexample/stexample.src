@@ -79,7 +79,24 @@ $(VXWORKS_ONLY)tyHYOctalConfig (PORT600, 9600, 'N', 1, 8, 'N')
 # Params are : portName, ttyName, priority, noAutoConnect, noProcessEos
 $(VXWORKS_ONLY)drvAsynSerialPortConfigure("ty_60_0", "/ty/60/0", 0, 0, 0)
 
-STREAM_PROTOCOL_DIR = "$(CRYOCONM32)/data"
+# Use this for an application where SMC is defined in terms of SUPPORT or WORK
+# which do not contain TOP or .. in them ie from outside the support module.
+# epicsEnvSet ("STREAM_PROTOCOL_PATH", "$(CRYOCONM32)/data")
+#
+# Or you can use this if they do.  It relies on knowing the structure of the directories.
+# epicsEnvSet ("STREAM_PROTOCOL_PATH", "../data")
+#
+# Unlike other files, protocol files are not copied into the area of the application, but have to be referenced
+# in the support area.
+# Because of the make build environment, and because the example is built in a sub directory
+# under the smc directory, a CRYOCONM32 variable defined during development 
+# in the example RELEASE file as a relative path containing ".." is incorrectly expanded
+# from this source file by the time it becomes the target boot script file under the target
+# architecture subdirectory.  The CRYOCONM32 and TOP variables are expanded by the make files and are
+# not available in the vxWorks shell.
+
+#STREAM_PROTOCOL_DIR = "$(CRYOCONM32)/data"
+STREAM_PROTOCOL_DIR = "../data"
 
 ## Load record instances
 dbLoadRecords("db/example.db")
