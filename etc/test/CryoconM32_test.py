@@ -1,4 +1,4 @@
-#!/dls_sw/tools/bin/python2.4
+#!/bin/env dls-python2.4
 
 # Test suite to use with pyUnit
 
@@ -15,7 +15,7 @@ class CryoconM32TestSuite(TestSuite):
         # Define the targets for this test suite
         # The ioc has to be started with screen for the sake of interfacing with Hudson, the integration engine.
         # Something to do with what happens to the IOC stdin.
-        Target("simulation", self,
+        Target("simulation", self, simulationCmds=['data/CryoconM32_sim.py -i 8001 -r 9017'],
             iocDirectory="iocs/example_sim",
             iocBootCmd="bin/linux-x86/stexample.sh",
             epicsDbFiles="db/example_expanded.db",

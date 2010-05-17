@@ -1,7 +1,7 @@
 from iocbuilder import Substitution
 from iocbuilder.arginfo import *
 from iocbuilder.modules.streamDevice import AutoProtocol
-from iocbuilder.modules.asyn import AsynOctetInterface
+from iocbuilder.modules.asyn import AsynPort
 from iocbuilder.modules.calc import Calc
 
 class CryoconM32(Substitution, AutoProtocol):
@@ -17,7 +17,7 @@ class CryoconM32(Substitution, AutoProtocol):
     # __init__ arguments
     ArgInfo = makeArgInfo(__init__,
         tctrlr = Simple('The PV prefix for the temperature controller', str),
-        port   = Ident ('Asyn Port', AsynOctetInterface),
+        port   = Ident ('Asyn Port', AsynPort),
         egu    = Simple('Engineering units for sink temperature', str))
 
     # Substitution attributes

@@ -1,8 +1,8 @@
-#!/bin/env python2.4
+#!/bin/env python2.6
 import time
 from pkg_resources import require
 require('dls_serial_sim')
-from dls_serial_sim import serial_device
+from dls_serial_sim import serial_device, CreateSimulation
 #from autotestframework import serial_device
 import re, os
 
@@ -486,11 +486,6 @@ class CryoconM32(serial_device):
         '''Called by the framework when the power is switched on.'''
         self.on = 1
 
-if __name__ == "__main__":
-    # little test function that runs only when you run this file
-    # Not used by built IOC
-    dev = CryoconM32()
-    dev.start_ip(9017)
-    dev.start_debug(9018)
-    # do a raw_input() to stop the program exiting immediately
+if __name__=="__main__":
+    CreateSimulation(CryoconM32)
     raw_input()
