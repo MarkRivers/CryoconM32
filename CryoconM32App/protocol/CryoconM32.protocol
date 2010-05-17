@@ -134,7 +134,7 @@ getControllerName { out "SYSTEM:NAME?" ; in "%s" ; }
 
 # Have been inconsistent about how the sink and ambient temperature are read
 # in for no good reason.  Should test this with the instrument one day and
-# set them the same.
+# set them the same.  Also not sure about the carriage return here.
 # # Get the ambient temperature inside the instrument.
 getAmbientT { out "SYSTEM:AMBIENT?" ; in "%s" ; }
 
