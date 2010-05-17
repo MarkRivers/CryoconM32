@@ -86,7 +86,7 @@ class Loop(object):
         if arg_loopType in Loop.allowedLoopTypes :
             # NOTE: This is a best guess what the behaviour is if you try to
             # set one of these when the Ramp status is not appropriate.
-            if arg_loopType == "PID" and self.Ramp == "YES" :
+            if arg_loopType == "PID" and self.loopRamp == "YES" :
                 self.loopType = "RampP"
             elif arg_loopType == "RampP" and self.Ramp == "NO" :
                 self.loopType = "PID"
@@ -193,6 +193,9 @@ class CryoconM32(serial_device):
         self.hardwareRev = "Simulation ABC"
         self.model = "CryoconM32"
         self.controllerName = "Magnet-22"
+        # The protocol file at present has a carriage return character in its format
+        # definition.  Need to test this against the real instrument to figure out
+        # what is going on.
         self.ambientT = "+32C"
         self.sinkT = "+50C"
         self.calcStatsReset()
@@ -201,6 +204,8 @@ class CryoconM32(serial_device):
         return
 
     def doReseed(self):
+        # Found problem with the reseed record, put print statement in to try to help diagnose.
+        print "####RESEEDING####"
         self.covered("reseed")
         return
     
@@ -252,7 +257,7 @@ class CryoconM32(serial_device):
         return
     
     def doStatsReset(self):
-        # This method is to handle a user instruction to reset.
+       # This method is to handle a user instruction to reset.
         self.calcStatsReset()
         self.covered("resetStats")
         return
@@ -261,6 +266,7 @@ class CryoconM32(serial_device):
         '''This function must be defined. It is called by the serial_sim system
         whenever an asyn command is send down the line. Must return a string
         with a response to the command or None.'''
+#        print "###REPLYING### to %s" %arg_command
         if self.diagnosticLevel() > 4:
             print "CryocomM32_sim: Received command " + arg_command
         result = None
@@ -271,8 +277,8 @@ class CryoconM32(serial_device):
         w = my_command.split()
         
         if len(w) == 0:
-            if self.diagnosticLevel() > 1:
-                print "CryoconM32_sim: Empty command string."
+            #if self.diagnosticLevel() > 1:
+            print "CryoconM32_sim: Empty command string."
             return result
 
         query = my_command.endswith("?")
@@ -420,7 +426,9 @@ class CryoconM32(serial_device):
                     if self.diagnosticLevel() > 2:
                         print "CryoconM32_sim: Unexpected question mark in command " + my_command    
                 else :
+                    print "#####DOING RESEED#####"
                     result = self.doReseed()
+                    self.covered("reseed")
             elif my_param.startswith("FWREV"):
                 if query :
                     result = self.getFirmwareRev()
@@ -466,6 +474,7 @@ class CryoconM32(serial_device):
         if self.diagnosticLevel() > 2 and set:
             print "CryoconM32: Returning result " + result
 
+#        print "###REPLYING### %s->%s" %(arg_command,result) 
         return result
                                         
     # This is the backdoor.

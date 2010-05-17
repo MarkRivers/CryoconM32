@@ -35,6 +35,7 @@ class CryoconM32TestSuite(TestSuite):
         CaseGetSensorRawReadings(self)
         CaseGetSensorTemperatureStatistics(self)
         CaseChangeLoopSetpoints(self)
+        CaseChangeLoopTypes(self)
         CaseChangeLoopManualOutputs(self)
         CaseChangeLoopPIDs(self)
         CaseSystemStats(self)
@@ -73,6 +74,9 @@ class CryoconM32Case(TestCase):
 class CaseIdentifySystem( CryoconM32Case ):
     def runTest(self):
         '''Get the unit to identify itself.'''
+        self.putPv(self.pvPrefix + "STS:SINKTEMP.TPRO" , 1)
+        self.putPv(self.pvPrefix + "STS:AMBIENTTEMP.TPRO" , 1)
+        self.putPv(self.pvPrefix + "STS:STATS:TIME.TPRO" , 1)
         print "Model = " + self.getPv(self.pvPrefix + "SYS:MODEL")
         print "Hardware Revision = " + self.getPv(self.pvPrefix + "SYS:HWREV")
         print "Firmware Revision = " + self.getPv(self.pvPrefix + "SYS:FWREV")
@@ -83,10 +87,18 @@ class CaseSystemStats( CryoconM32Case ):
     def runTest(self):
         '''Perform tests on stats functions which belong to the system and not a loop.'''
         print "Stats time = " + str(self.getPv(self.pvPrefix + "STS:STATS:TIME"))
+        # The tests in these 2 calls are not actually working in that they return blank information.
+        # The protocol call does not appear to be made.  There seem to be potential issues
+        # in the protocol and template file but need to test against the real instrument
+        # to find out what format it really returns the information in.
         print "Sink temperature = " + str(self.getPv(self.pvPrefix + "STS:SINKTEMP"))
         print "Ambient temperature = " + self.getPv(self.pvPrefix + "STS:AMBIENTTEMP")
         print "Testing averaging filter reseed now."
+        # This test mysteriously fails because the protocol call is not made.
+        # The CryoconM14 has the same command and the same problem in its test suite and also
+        # the same problem
         self.putPv(self.pvPrefix + "DMD:RESEED.PROC" , 1)
+        print "Returned from reseed"
         return
 
 class CaseResetSystemStats( CryoconM32Case ):
@@ -149,6 +161,61 @@ class CaseChangeLoopSetpoints( CryoconM32Case ):
         '''Change the setpoint temperatures for both control loops.'''
         self.changeLoopSetpoint ( "1" , 3.5 )
         self.changeLoopSetpoint ( "2" , 9.0 )
+        return
+
+class CaseChangeLoopTypes( CryoconM32Case ):
+    def changeLoopType(self, arg_loopID, arg_loopType):
+        '''
+        Change the loop type.  Expect this test to work for all loop types.
+        '''
+        print "changeLoopType: loopID = " + arg_loopID + " arg_loopType = " + arg_loopType
+
+        # Construct names of PVs to be used.
+        my_demandPv = self.pvPrefix + "DMD:LOOP" + arg_loopID + ":LOOPTYPE"
+        my_statusPv = self.pvPrefix + "STS:LOOP" + arg_loopID + ":LOOPTYPE"
+
+        print "changeLoopType: my_demandPv = " + my_demandPv + " my_statusPv = " + my_statusPv 
+
+        my_sleeptime = 2
+        
+        # Grab existing status value.
+        my_before = self.getPv(my_statusPv)
+
+        # Write new demand value and verify it was OK.
+        self.putPv(my_demandPv , arg_loopType )
+        wilma = self.getPv(my_demandPv)
+        print "wilma = " + str(wilma)
+        self.sleep(my_sleeptime)
+        print "####NOW###"
+        fred = self.verifyPv(my_demandPv , arg_loopType)
+
+        print "####SLEEPING###"
+        # Wait for status to be updated and then verify the new status.
+        self.sleep(my_sleeptime)
+
+        # This is complicated by the fact that I am not sure about the interaction
+        # between PID and RampP and ramp status in real instrument - guessing.
+        exception_loopTypes=["PID","RampP"]
+
+#        if arg_loopType in exception_loopTypes :
+#            my_after = self.getPv(my_statusPv )
+#            if my_after not in exception_loopTypes :
+#                self.fail("#" + my_statusPv + " value of " + my_after + "is not in exception types list after attempt to change to loop type" + arg_loopType )
+#        else :
+
+        my_after = self.verifyPv(my_statusPv , arg_loopType)
+
+        print "Loop " + arg_loopID + " loop type" + my_statusPv + " changed from " + my_before + " to " + my_after        
+        return
+
+    def runTest(self):
+        '''Change the looptype for both control loops to each possible loop type in turn.'''
+        # It might be better to fetch the allowed looptype strings from the mbbo fields
+        # here but lets cheat and use a fixed list.
+        for my_loopType in ["PID", "Man", "Table", "RampP", "Off" ]:
+            self.changeLoopType( "1" , my_loopType )
+            self.changeLoopType( "2" , my_loopType )
+        
         return
 
 class CaseChangeLoopManualOutputs( CryoconM32Case ):
