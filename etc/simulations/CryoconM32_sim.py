@@ -4,7 +4,7 @@ from pkg_resources import require
 require('dls_serial_sim')
 from dls_serial_sim import serial_device, CreateSimulation
 #from autotestframework import serial_device
-import re, os
+import re, os, time
 
 # This is a helper class.
 # This is so we can instantiate 2 objects to match the 2 instantiations of the sensor template.
@@ -488,4 +488,5 @@ class CryoconM32(serial_device):
 
 if __name__=="__main__":
     CreateSimulation(CryoconM32)
-    raw_input()
+    while(True):
+        time.sleep(1)
