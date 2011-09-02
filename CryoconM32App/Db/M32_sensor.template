@@ -10,7 +10,7 @@
 # device	The device name.
 # record	the record name, T1 or T2
 #
-# %gdatag,template,simplePv,$(gda_name).$(record),$(gda_desc)
+# %gdatag,template,simplePv,$(gda_name=).$(record),$(gda_desc=)
 # # The readback value of the units the unit is reporting in.
 record(stringin, "$(device):STS:$(record):UNITS") {
   field(DESC, "Temp. units.")
@@ -20,7 +20,7 @@ record(stringin, "$(device):STS:$(record):UNITS") {
 }
 
 # % archiver 10 Monitor
-# %gdatag,pv,ro,$(gda_name).$(record),RECORD,Sensor temperature
+# %gdatag,pv,ro,$(gda_name=).$(record),RECORD,Sensor temperature
 # # The readback value of the temperature converted (by the unit).
 record(ai, "$(device):STS:$(record)") {
   field(DESC, "Sensor Temperature")

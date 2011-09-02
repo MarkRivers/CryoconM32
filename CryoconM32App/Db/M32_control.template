@@ -14,11 +14,11 @@
 # scan		The scan rate of certain records that may affect performance.
 # rampratelimit	The limit to be imposed on the temperate ramp rate.
 #
-# %gdatag,template,simplePv,$(gda_name).SETPOINT-DMD,$(gda_desc) setpoint demand
-# %gdatag,template,simplePv,$(gda_name).SETPOINT-RBV,$(gda_desc) setpoint readback
-# %gdatag,template,simplePv,$(gda_name).MANUAL-DMD,$(gda_desc) manual control demand
-# %gdatag,template,simplePv,$(gda_name).MANUAL-RBV,$(gda_desc) manual control readback
-# %gdatag,pv,ro,$(gda_name).SETPOINT-RBV,RECORD,Setpoint readback
+# %gdatag,template,simplePv,$(gda_name=).SETPOINT-DMD,$(gda_desc=) setpoint demand
+# %gdatag,template,simplePv,$(gda_name=).SETPOINT-RBV,$(gda_desc=) setpoint readback
+# %gdatag,template,simplePv,$(gda_name=).MANUAL-DMD,$(gda_desc=) manual control demand
+# %gdatag,template,simplePv,$(gda_name=).MANUAL-RBV,$(gda_desc=) manual control readback
+# %gdatag,pv,ro,$(gda_name=).SETPOINT-RBV,RECORD,Setpoint readback
 # # The readback of the temperature setpoint for the given control loop.
 record(ai, "$(tctrlr):STS:LOOP$(loop):SETPOINT") {
   field(DESC, "Setpoint Temp, loop $(loop).")
@@ -76,7 +76,7 @@ record(ai, "$(tctrlr):STS:LOOP$(loop):RAMPRATE") {
   field(LLSV, "MINOR")
 }
 
-# %gdatag,pv,rw,$(gda_name).SETPOINT-DMD,RECORD,Setpoint demand
+# %gdatag,pv,rw,$(gda_name=).SETPOINT-DMD,RECORD,Setpoint demand
 # # The demand value of the temperature setpoint for the control loop.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):SETPOINT") {
   field(DESC, "Demand setpoint Temp.")
@@ -232,7 +232,7 @@ record(stringin, "$(tctrlr):PRM:LOOP$(loop):SLOPELIMSFX") {
   field(VAL, ":SLOPE.HIHI")
 }
 
-# %gdatag,pv,rw,$(gda_name).MANUAL-DMD,RECORD,Manual output demand
+# %gdatag,pv,rw,$(gda_name=).MANUAL-DMD,RECORD,Manual output demand
 # # The demand value of output power level to be used when the loop is in manual operation mode.
 record(ao, "$(tctrlr):DMD:LOOP$(loop):MANUAL") {
   field(DESC, "Manual control output demand")
@@ -243,7 +243,7 @@ record(ao, "$(tctrlr):DMD:LOOP$(loop):MANUAL") {
   field(EGU, "%")
 }
 
-# %gdatag,pv,ro,$(gda_name).MANUAL-RBV,RECORD,Manual output readback
+# %gdatag,pv,ro,$(gda_name=).MANUAL-RBV,RECORD,Manual output readback
 # # The readback value of output power level to be used when the loop is in manual operation mode.
 record(ai, "$(tctrlr):STS:LOOP$(loop):MANUAL") {
   field(DESC, "Manual control output")
