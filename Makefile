@@ -9,5 +9,5 @@ DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocboot))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard etc))
 # Comment out the following line to disable building of example iocs
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocs))
-DIRS := $(DIRS) example
+#DIRS := $(DIRS) example
 include $(TOP)/configure/RULES_TOP
