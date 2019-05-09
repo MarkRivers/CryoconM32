@@ -18,15 +18,15 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 #SNCSEQ=/home/diamond/R3.14.7/prod/support/seq/2-0-10
 
 #Support Area
-SUPPORT=/dls_sw/prod/R3.14.12.3/support
+SUPPORT=/dls_sw/prod/R3.14.12.7/support
 
 #Support Modules
-ASYN=$(SUPPORT)/asyn/4-21
-STREAM=$(SUPPORT)/streamDevice/2-5dls2
-CALC=$(SUPPORT)/calc/3-1
+ASYN=$(SUPPORT)/asyn/4-31
+STREAM=$(SUPPORT)/streamDevice/2-5dls6
+CALC=$(SUPPORT)/calc/3-7
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-EPICS_BASE=/dls_sw/epics/R3.14.12.3/base
+EPICS_BASE=/dls_sw/epics/R3.14.12.7/base
 
 #Capfast users may need the following definitions
 #CAPFAST_TEMPLATES=
