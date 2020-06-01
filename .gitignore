@@ -5,6 +5,7 @@ dbd
 db
 data
 lib
+*BAK.adl
 .svn*
 iocs/*IOC*
 .idea
