@@ -18,17 +18,16 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 #SNCSEQ=/home/diamond/R3.14.7/prod/support/seq/2-0-10
 
 #Support Area
-SUPPORT=/dls_sw/prod/R3.14.12.7/support
+SUPPORT=/corvette/home/epics/support
 
 #Support Modules
-ASYN=$(SUPPORT)/asyn/4-34
-STREAM=$(SUPPORT)/streamDevice/2-5dls11
-CALC=$(SUPPORT)/calc/3-7
+ASYN=$(SUPPORT)/asyn-4-38
+STREAM=$(SUPPORT)/stream-2-8-9
+CALC=$(SUPPORT)/calc-3-7-3
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-EPICS_BASE=/dls_sw/epics/R3.14.12.7/base
+EPICS_BASE=/corvette/usr/local/epics/base-7.0.3.1
 
-#Capfast users may need the following definitions
-#CAPFAST_TEMPLATES=
-#SCH2EDIF_PATH=
--include $(TOP)/configure/RELEASE.private
+-include $(TOP)/../RELEASE.local
+-include $(TOP)/../RELEASE.$(EPICS_HOST_ARCH).local
+-include $(TOP)/configure/RELEASE.local
