@@ -1,6 +1,6 @@
 
 file {
-	name="/home/epics/support/CryoconM32/CryoconM32App/opi/adl/CryoconTop.adl"
+	name="/home/epics/support/CryoconM32/CryoconM32App/opi/adl/CryoconM32Top.adl"
 	version=030109
 }
 display {
@@ -95,8 +95,8 @@ display {
 		height=24
 	}
 	display[0] {
-		label="Cryocon 22C"
-		name="Cryocon22C.adl"
+		label="Cryocon"
+		name="CryoconM32.adl"
 		args="P=13Cryocon1:,R=CC1:,T1=T1,T2=T2"
 	}
 	clr=14
