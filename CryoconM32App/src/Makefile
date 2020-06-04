@@ -6,7 +6,7 @@ include $(TOP)/configure/CONFIG
 # Build an Diamond Support Module
 # -------------------------------
 
-LIBRARY_IOC += CryoconM32
+PROD_IOC += CryoconM32
 
 # CryoconM32.dbd will be installed into <top>/dbd
 DBD += CryoconM32.dbd
@@ -22,8 +22,8 @@ CryoconM32_DBD += calcSupport.dbd
 CryoconM32_SRCS += CryoconM32_registerRecordDeviceDriver.cpp
 
 # These two lines are needed for non-vxWorks builds, such as Linux
-#CryoconM32_SRCS_DEFAULT += CryoconM32Main.cpp
-#CryoconM32_SRCS_vxWorks += -nil-
+CryoconM32_SRCS_DEFAULT += CryoconM32Main.cpp
+CryoconM32_SRCS_vxWorks += -nil-
 
 # Add locally compiled object code
 #CryoconM32_SRCS +=
@@ -33,7 +33,9 @@ CryoconM32_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 
 # This line says that this IOC Application depends on the
 # xxx Support Module
-#CryoconM32_LIBS += xxx
+CryoconM32_LIBS += stream
+CryoconM32_LIBS += calc
+CryoconM32_LIBS += asyn
 
 # We need to link this IOC Application against the EPICS Base libraries
 CryoconM32_LIBS += $(EPICS_BASE_IOC_LIBS)
