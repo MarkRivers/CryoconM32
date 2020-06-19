@@ -35,6 +35,7 @@ CryoconM32_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 # xxx Support Module
 CryoconM32_LIBS += stream
 CryoconM32_LIBS += calc
+CryoconM32_LIBS += sscan
 CryoconM32_LIBS += asyn
 
 # We need to link this IOC Application against the EPICS Base libraries
